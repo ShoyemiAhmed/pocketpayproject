@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketPay Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">
+
+            <img src="images/pocketpaynew.png" alt="PocketPay">
+
+        </div>
+
+        <div class="icons">
+
+             <i class="fa-regular fa-bell"></i>
+
+            <i class="fa-regular fa-user"></i>
+
+        </div>
+
+    </header>
+
+    <!-- Greeting -->
+
+    <section class="greeting">
+
+        <h2>Good Morning, Ahmed 👋</h2>
+
+        <p>Welcome back to PocketPay</p>
+
+    </section>
+
+    <!-- Wallet Card -->
+
+    <section class="wallet-card">
+
+        <p>Available Balance</p>
+
+        <h1 id="balance">₦1,200,000.00</h1>
+
+        <button id="toggleBalance">
+
+            <i class="fa-regular fa-eye"></i>
+
+            👁️ Hide Balance
+        </button>
+
+        <small>Wallet ID: PP20260001</small>
+
+    </section>
+         <section class="quick-actions">
+
+    <h3>Quick Actions</h3>
+
+    <div class="actions-grid">
+
+        <div class="action-card" 
+             id="sendMoney">
+            <i class="fa-solid fa-paper-plane"></i>
+            <p>Send Money</p>
+        </div>
+
+        <div class="action-card"
+            id="receiveMoney">
+            <i class="fa-solid fa-download"></i>
+            <p>Receive Money</p>
+        </div>
+
+        <div class="action-card"
+            id="addMoney">
+            <i class="fa-solid fa-wallet"></i>
+            <p>Add Money</p>
+        </div>
+
+        <div class="action-card"
+            id="airtime">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <p> Airtime Top up </p>
+        </div>
+            
+           <section class="transactions">
+
+    <div class="section-header">
+        <h3>Recent Transactions</h3>
+        <a href="#">See All</a>
+    </div>
+
+    <div class="transaction">
+
+        <div class="transaction-icon income">
+            <i class="fa-solid fa-arrow-down"></i>
+        </div>
+
+        <div class="transaction-info">
+            <h4>Salary Payment</h4>
+            <small>Today • 10:30 AM</small>
+        </div>
+
+        <div class="amount positive">
+            +₦250,000
+        </div>
+
+    </div>
+
+    <div class="transaction">
+
+        <div class="transaction-icon expense">
+            <i class="fa-solid fa-paper-plane"></i>
+        </div>
+
+        <div class="transaction-info">
+            <h4>Transfer to David</h4>
+            <small>Yesterday • 4:15 PM</small>
+        </div>
+
+        <div class="amount negative">
+            -₦15,000
+        </div>
+
+    </div>
+
+    <div class="transaction">
+
+        <div class="transaction-icon expense">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+
+        <div class="transaction-info">
+            <h4>Airtime Purchase</h4>
+            <small>Jul 12 • 8:00 AM</small>
+        </div>
+
+        <div class="amount negative">
+            -₦2,000
+        </div>
+
+    </div>
+
+</section>
+          <!-- Paste Here -->
+
+<nav class="bottom-nav">
+
+    <a href="#" class="active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="#">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Transactions</span>
+    </a>
+
+    <a href="#">
+        <i class="fa-regular fa-credit-card"></i>
+        <span>Cards</span>
+    </a>
+
+    <a href="#">
+        <i class="fa-regular fa-user"></i>
+        <span>Profile</span>
+    </a>
+
+</nav>
+    </div>
+
+</section>
+
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
