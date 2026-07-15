@@ -47,24 +47,24 @@
                  maxlength="10">
                 
             </div>
-            <small class="error" id="phoneError"></small>
+                <small class="error" id="phoneError"></small>
 
                  <label>Password</label>
 
             <div class="password-box">
 
-                    <input 
+                        <input 
                          type="password"
                          id="password" 
                          placeholder="Create password"
                          
                     >
                          <span class="toggle-password"
-                    onclick="togglePassword('password')">
+                         onclick="togglePassword('password')">
                            👁️
-                    </span>
+                        </span>
             </div>
-                   <small class="error" id="passwordError"></small>
+                       <small class="error" id="passwordError"></small>
 
             <label>Confirm Password</label>
 
@@ -77,14 +77,33 @@
                      
                  >
                     <span class="toggle-password"
-                onclick="togglePassword('confirmPassword')">
+                     onclick="togglePassword('confirmPassword')">
                        👁️
                 </span>
             </div>
-               <small class="error" id="confirmPasswordError"></small>
-         <button type="submit" id="signupBtn">
-                          Create Account
+                    <small class="error" id="confirmPasswordError"></small>
+                <div class="terms">
+
+                     <input
+                     type="checkbox"
+                     id="agreeTerms"
+             >
+
+            <label for="agreeTerms">
+                     I agree to the
+                <a href="#">Terms & Conditions</a>
+                    and
+                      <a href="#">Privacy Policy</a>
+                 </label>
+
+            </div>
+
+                 <small class="error" id="termsError"></small>
+
+                 <button type="submit" id="signupBtn">
+                       Create Account
                 </button>
+
                 <p id="successMessage" class="success"></p>
         </form>
 

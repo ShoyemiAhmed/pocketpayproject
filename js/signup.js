@@ -1,4 +1,36 @@
+// ===============================
+// PocketPay Signup JavaScript
+// ===============================
+
+const form = document.getElementById("signupForm");
+
+const fullname = document.getElementById("fullname");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+
+const agreeTerms = document.getElementById("agreeTerms");
+
+const signupBtn = document.getElementById("signupBtn");
+const successMessage = document.getElementById("successMessage");
+
+// ===============================
+// Disable button until terms accepted
+// ===============================
+
+signupBtn.disabled = true;
+
+agreeTerms.addEventListener("change", function () {
+    signupBtn.disabled = !this.checked;
+});
+
+// ===============================
+// Show / Hide Password
+// ===============================
+
 function togglePassword(id) {
+
     const input = document.getElementById(id);
 
     if (input.type === "password") {
@@ -6,98 +38,168 @@ function togglePassword(id) {
     } else {
         input.type = "password";
     }
+
 }
 
-const form = document.getElementById("signupForm");
+// ===============================
+// Form Validation
+// ===============================
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function (event) {
+
     event.preventDefault();
 
-    // Clear previous errors
-    document.querySelectorAll(".error").forEach(error => error.textContent = "");
+    // Clear old messages
+
+    document.querySelectorAll(".error").forEach(error => {
+        error.textContent = "";
+    });
+
+    successMessage.style.display = "none";
+    successMessage.textContent = "";
 
     let isValid = true;
 
-    const fullname = document.getElementById("fullname").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    
-    
+    // ==========================
+    // Full Name
+    // ==========================
 
-    if (fullname === "") {
-        document.getElementById("fullnameError").textContent = "Full name is required.";
+    if (fullname.value.trim() === "") {
+
+        document.getElementById("fullnameError").textContent =
+            "Full name is required.";
+
         isValid = false;
+
     }
+
+    // ==========================
+    // Email
+    // ==========================
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-if (email === "") {
-    document.getElementById("emailError").textContent = "Email is required.";
-    isValid = false;
-} else if (!emailPattern.test(email)) {
-    document.getElementById("emailError").textContent = "Please enter a valid email address.";
-    isValid = false;
-}
+    if (email.value.trim() === "") {
+
+        document.getElementById("emailError").textContent =
+            "Email is required.";
+
+        isValid = false;
+
+    } else if (!emailPattern.test(email.value.trim())) {
+
+        document.getElementById("emailError").textContent =
+            "Enter a valid email address.";
+
+        isValid = false;
+
+    }
+
+    // ==========================
+    // Nigerian Phone Number
+    // User enters only 10 digits
+    // Example:
+    // 8123456789
+    // ==========================
 
     const phonePattern = /^[789][01]\d{8}$/;
 
-if (phone === "") {
-    document.getElementById("phoneError").textContent = "Phone number is required.";
-    isValid = false;
-} else if (!phonePattern.test(phone)) {
-    document.getElementById("phoneError").textContent =
-        "Enter a valid phone number.";
-    isValid = false;
-}
+    if (phone.value.trim() === "") {
+
+        document.getElementById("phoneError").textContent =
+            "Phone number is required.";
+
+        isValid = false;
+
+    } else if (!phonePattern.test(phone.value.trim())) {
+
+        document.getElementById("phoneError").textContent =
+            "Enter a valid Nigerian phone number.";
+
+        isValid = false;
+
+    }
+
+    // ==========================
+    // Password
+    // ==========================
 
     const passwordPattern =
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
-if (!passwordPattern.test(password)) {
-    document.getElementById("passwordError").textContent =
-        "Password must contain uppercase, lowercase, number and be at least 8 characters long.";
-    isValid = false;
-}
+    if (password.value === "") {
 
-    if (password !== confirmPassword) {
-        document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
+        document.getElementById("passwordError").textContent =
+            "Password is required.";
+
         isValid = false;
+
+    } else if (!passwordPattern.test(password.value)) {
+
+        document.getElementById("passwordError").textContent =
+            "Password must be at least 8 characters and include uppercase, lowercase, number and special character.";
+
+        isValid = false;
+
     }
-             const successMessage = 
-                  document.getElementById("successMessage");
-             const signupBtn = document.getElementById("signupBtn");
-       if (isValid) {
-           //Disable the button
-              signupBtn.disabled = true;
 
-              //Show the loading spinner
-              signupBtn.innerHTML = 
-                  '<span class="spinner"></span> Creating Account...';
+    // ==========================
+    // Confirm Password
+    // ==========================
 
-                   // Simulate waiting for the backend
-    setTimeout(function () {
+    if (confirmPassword.value === "") {
 
-        // Enable the button again
-        signupBtn.disabled = false;
+        document.getElementById("confirmPasswordError").textContent =
+            "Please confirm your password.";
 
-        // Restore the button text
-        signupBtn.innerHTML = "Create Account";
+        isValid = false;
 
-        // Show success message
-        successMessage.textContent =
-            "✅ PocketPay account created successfully!";
+    } else if (password.value !== confirmPassword.value) {
 
-        successMessage.style.display = "block";
+        document.getElementById("confirmPasswordError").textContent =
+            "Passwords do not match.";
 
-    }, 2000);
+        isValid = false;
 
-                
-       }else {
+    }
 
-        successMessage.textContent = "";
-        successMessage.style.display = "none";
-       }
+    // ==========================
+    // Terms
+    // ==========================
+
+    if (!agreeTerms.checked) {
+
+        document.getElementById("termsError").textContent =
+            "You must agree to the Terms & Conditions.";
+
+        isValid = false;
+
+    }
+
+    // ==========================
+    // Success
+    // ==========================
+
+    if (isValid) {
+
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creating Account...";
+
+        setTimeout(function () {
+
+            signupBtn.disabled = false;
+            signupBtn.textContent = "Create Account";
+
+            successMessage.style.display = "block";
+            successMessage.textContent =
+                "🎉 Account created successfully!";
+
+            form.reset();
+
+            signupBtn.disabled = true;
+
+        }, 2000);
+
+    }
 
 });
