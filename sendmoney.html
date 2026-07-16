@@ -50,6 +50,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         id="recipient"
         placeholder="Enter recipient name"
     >
+         <small class="error" id="recipientError"></small>
 
     <label>Select Bank</label>
 
@@ -67,6 +68,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         <option>Kuda</option>
 
     </select>
+       <small class="error" id="bankError"></small>
 
     <label>Account Number</label>
 
@@ -76,6 +78,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         placeholder="10-digit account number"
         maxlength="10"
     >
+       <small class="error" id="accountError"></small>
 
     <label>Amount</label>
 
@@ -84,6 +87,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         id="amount"
         placeholder="Enter amount"
     >
+        <small class="error" id="amountError"></small>
 
     <label>Description (Optional)</label>
 
@@ -100,11 +104,71 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     </button>
 
 </form>
+      <div class="transfer-summary">
+    <h3>Transfer Summary</h3>
 
+    <div class="summary-item">
+        <span>Recipient</span>
+        <span id="summaryRecipient">-</span>
+    </div>
+
+    <div class="summary-item">
+        <span>Bank</span>
+        <span id="summaryBank">-</span>
+    </div>
+
+    <div class="summary-item">
+        <span>Amount</span>
+        <span id="summaryAmount">₦0.00</span>
+    </div>
+
+    <div class="summary-item">
+        <span>Transfer Fee</span>
+        <span>₦10.00</span>
+    </div>
+
+    <hr>
+
+    <div class="summary-item total">
+        <span>Total</span>
+        <span id="summaryTotal">₦10.00</span>
+    </div>
+</div>
+
+
+</div>
+<div class="modal" id="confirmModal">
+
+    <div class="modal-content">
+
+        <h2>Confirm Transfer</h2>
+
+        <p><strong>Recipient:</strong> <span id="modalRecipient"></span></p>
+
+        <p><strong>Bank:</strong> <span id="modalBank"></span></p>
+
+        <p><strong>Amount:</strong> <span id="modalAmount"></span></p>
+
+        <p><strong>Transfer Fee:</strong> ₦10.00</p>
+
+        <hr>
+
+        <p><strong>Total:</strong> <span id="modalTotal"></span></p>
+
+        <div class="modal-buttons">
+
+            <button id="cancelBtn">Cancel</button>
+
+            <button id="confirmBtn">Confirm</button>
+
+        </div>
+
+    </div>
 
 </div>
 
 <script src="js/sendmoney.js"></script>
+  
 
 </body>
 

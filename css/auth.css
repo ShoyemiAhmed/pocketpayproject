@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing:border-box;
-    font-family: "Poppins";
+    font-family: "poppins";
 }
 
 body {
@@ -98,25 +98,33 @@ a:hover {
 
 .password-box {
     position:relative;
-    width: 65px
+    width: 100%;
  }
  
 .password-box input {
-    width: 590%;
-    padding-right: 45px;
+    width: 100%;
+    padding-right: 12px 45px 12px 12px;
+    border:1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .password-box input:focus{
+    border-color:#2563Eb;
   }
     
 .toggle-password{
     position: absolute;
     right: 15px;
-    left: 540%;
-    top: 45%;
+    top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
+    color: #666;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 400px){
 
 .container{
         width:95%;
@@ -132,7 +140,7 @@ label{
 }
 
 input{
-        font-size:15px;
+        font: size 1px;
         padding:12px;
 }
 
