@@ -166,6 +166,46 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     </div>
 
 </div>
+       <div class="success-modal" id="successModal">
+
+    <div class="success-content">
+
+        <i class="fa-solid fa-circle-check success-icon"></i>
+
+        <h2>Transfer Successful</h2>
+
+        <p><strong>Reference:</strong> <span id="receiptReference"></span></p>
+
+        <p><strong>Recipient:</strong> <span id="receiptRecipient"></span></p>
+
+        <p><strong>Bank:</strong> <span id="receiptBank"></span></p>
+
+        <p><strong>Amount:</strong> <span id="receiptAmount"></span></p>
+
+        <p><strong>Fee:</strong> ₦10.00</p>
+
+        <p><strong>Total:</strong> <span id="receiptTotal"></span></p>
+
+        <button id="backDashboardBtn">
+            Back to Dashboard
+        </button>
+
+    </div>
+
+</div>
+    <div class="loading-modal" id="loadingModal">
+
+    <div class="loading-content">
+
+        <div class="spinner"></div>
+
+        <h2>Processing Transfer...</h2>
+
+        <p>Please wait while we complete your transaction.</p>
+
+    </div>
+
+</div>
 
 <script src="js/sendmoney.js"></script>
   
