@@ -1,0 +1,159 @@
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.receive-card{
+    width:100%;
+    max-width:450px;
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.receive-card h2{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.account-box{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.account-box label{
+    display:block;
+    color:#666;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.account-box h3,
+.account-box h2{
+    color:#111827;
+}
+
+#copyBtn{
+    width:100%;
+    margin-top:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+#copyBtn:hover{
+    background:#1d4ed8;
+}
+
+.qr-section{
+    margin-top:25px;
+    text-align:center;
+}
+
+.qr-box{
+    width:180px;
+    height:180px;
+    margin:20px auto;
+    border:2px dashed #2563eb;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.back-btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    margin-top:30px;
+    background:#111827;
+    color:white;
+    padding:14px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#000;
+}
+
+
+/* Mobile */
+
+@media(max-width:480px){
+
+.receive-card{
+
+        padding:20px;
+
+}
+
+.qr-box{
+
+    width:200px;
+    height:200px;
+    margin:20px auto;
+    background:#fff;
+    border:1px solid #ddd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:10px;
+    overflow:hidden;
+
+}}
+#downloadQRBtn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+#downloadQRBtn:hover{
+    background:#15803d;
+}
