@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Transaction History | PocketPay</title>
+
+    <link rel="stylesheet"
+          href="css/transaction-history.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="history-card">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <a href="dashboard.html" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </a>
+
+            <h2>Transaction History</h2>
+
+        </div>
+
+
+        <!-- Search + Filter -->
+
+        <div class="controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search transaction...">
+
+            <select id="filter">
+
+                <option value="all">All</option>
+
+                <option value="in">Money In</option>
+
+                <option value="out">Money Out</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Transaction List -->
+
+        <div id="transactionList">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/transaction-history.js"></script>
+
+</body>
+
+</html>

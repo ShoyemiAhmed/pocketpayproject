@@ -1,0 +1,283 @@
+/* ===========================
+   Global
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#011835;
+    padding:25px;
+}
+
+/* ===========================
+   Container
+=========================== */
+
+.container{
+    display:flex;
+    justify-content:center;
+}
+
+.history-card{
+    width:100%;
+    max-width:600px;
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.back-btn{
+    color:#2563eb;
+    text-decoration:none;
+    font-size:20px;
+}
+
+.header h2{
+    color:#2563eb;
+    font-size:28px;
+}
+
+/* ===========================
+   Search + Filter
+=========================== */
+
+.controls{
+    display:flex;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.controls input,
+.controls select{
+
+    flex:1;
+
+    padding:14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+}
+
+.controls input:focus,
+.controls select:focus{
+
+    border-color:#2563eb;
+
+}
+
+/* ===========================
+   Transaction Card
+=========================== */
+
+.transaction{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    background:#f8fafc;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+}
+
+.transaction:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+
+}
+
+/* ===========================
+   Left
+=========================== */
+
+.left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    font-size:18px;
+
+}
+
+.left h4{
+
+    margin-bottom:5px;
+
+    font-size:16px;
+
+}
+
+.date{
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+/* ===========================
+   Amount
+=========================== */
+
+.amount{
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    text-align:right;
+
+}
+
+.money-in{
+
+    color:#16a34a;
+
+}
+
+.money-out{
+
+    color:#dc2626;
+
+}
+
+/* ===========================
+   Status
+=========================== */
+
+.status{
+
+    display:inline-block;
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#888;
+
+}
+
+.empty i{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+
+    color:#2563eb;
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:600px){
+
+    body{
+
+        padding:15px;
+
+    }
+
+    .history-card{
+
+        padding:18px;
+
+    }
+
+    .controls{
+
+        flex-direction:column;
+
+    }
+
+    .transaction{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .amount{
+
+        text-align:left;
+
+    }
+
+}
