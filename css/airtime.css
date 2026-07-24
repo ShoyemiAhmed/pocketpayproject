@@ -1,0 +1,314 @@
+/* ===========================
+   Global
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    padding:20px;
+}
+
+/* ===========================
+   Container
+=========================== */
+
+.container{
+    display:flex;
+    justify-content:center;
+}
+
+.airtime-card{
+    width:100%;
+    max-width:500px;
+    background:#ffffff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.header a{
+    text-decoration:none;
+    color:#2563eb;
+    font-size:20px;
+}
+
+.header h2{
+    color:#2563eb;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:25px;
+}
+
+/* ===========================
+   Form
+=========================== */
+
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.input-group input,
+.input-group select{
+
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+
+}
+
+.input-group input:focus,
+.input-group select:focus{
+
+    border-color:#2563eb;
+
+}
+
+.error{
+
+    color:#dc2626;
+    font-size:13px;
+    display:block;
+    margin-top:5px;
+
+}
+
+/* ===========================
+   Continue Button
+=========================== */
+
+button[type="submit"]{
+
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button[type="submit"]:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===========================
+   Summary
+=========================== */
+
+.summary-card{
+
+    margin-top:30px;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:20px;
+
+}
+
+.summary-card h3{
+
+    color:#2563eb;
+    margin-bottom:15px;
+
+}
+
+.summary-row{
+
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+
+}
+
+.summary-row strong{
+
+    color:#111827;
+
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal{
+
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+
+}
+
+.modal-content,
+.loading-content{
+
+    width:90%;
+    max-width:380px;
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    text-align:center;
+
+}
+
+.modal-content h2{
+
+    color:#2563eb;
+    margin-bottom:20px;
+
+}
+
+.modal-content p{
+
+    margin:10px 0;
+
+}
+
+/* ===========================
+   Modal Buttons
+=========================== */
+
+.buttons{
+
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+
+}
+
+.buttons button{
+
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+
+}
+
+#cancelBtn{
+
+    background:#e5e7eb;
+
+}
+
+#confirmBtn{
+
+    background:#2563eb;
+    color:#fff;
+
+}
+
+/* ===========================
+   Loading Spinner
+=========================== */
+
+.spinner{
+
+    width:60px;
+    height:60px;
+    border:6px solid #dbeafe;
+    border-top:6px solid #2563eb;
+    border-radius:50%;
+    margin:0 auto 20px;
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ===========================
+   Success
+=========================== */
+
+.success-icon{
+
+    font-size:70px;
+    color:#16a34a;
+    margin-bottom:20px;
+
+}
+
+#backDashboardBtn{
+
+    margin-top:25px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+
+}
+
+#backDashboardBtn:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:480px){
+
+    .airtime-card{
+
+        padding:20px;
+
+    }
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+}

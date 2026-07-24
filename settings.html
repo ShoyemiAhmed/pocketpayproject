@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | PocketPay</title>
+
+    <link rel="stylesheet"
+          href="css/settings.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="settings-card">
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <a href="profile.html" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </a>
+
+            <h2>Settings</h2>
+
+        </div>
+
+        <!-- Settings List -->
+
+        <div class="setting-item">
+
+            <div class="left">
+
+                <i class="fa-solid fa-moon"></i>
+
+                <span>Dark Mode</span>
+
+            </div>
+
+            <label class="switch">
+
+                <input type="checkbox" id="darkMode">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-item">
+
+            <div class="left">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <span>Notifications</span>
+
+            </div>
+
+            <label class="switch">
+
+                <input type="checkbox" id="notifications" checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-item clickable" id="securityBtn">
+
+            <div class="left">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>Security</span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </div>
+
+        <div class="setting-item clickable" id="aboutBtn">
+
+            <div class="left">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span>About PocketPay</span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </div>
+
+        <div class="setting-item clickable logout" id="logoutBtn">
+
+            <div class="left">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/settings.js"></script>
+
+</body>
+
+</html>
