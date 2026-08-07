@@ -1,56 +1,203 @@
-// ==============================
+// ===================================
 // Elements
-// ==============================
+// ===================================
 
-const editBtn = document.getElementById("editBtn");
-const passwordBtn = document.getElementById("passwordBtn");
-const settingsBtn = document.getElementById("settingsBtn");
-const logoutBtn = document.getElementById("logoutBtn");
+const profileForm = document.getElementById("profileForm");
 
-// ==============================
-// Edit Profile
-// ==============================
+const fullName = document.getElementById("fullName");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
 
-editBtn.addEventListener("click", function () {
+const successMessage =
+document.getElementById("successMessage");
 
-    alert("Edit Profile feature coming soon.");
+const profileImage =
+document.getElementById("profileImage");
+
+const imageInput =
+document.getElementById("imageInput");
+
+const changePhotoBtn =
+document.getElementById("changePhotoBtn");
+
+
+// ===================================
+// Load Profile
+// ===================================
+
+function loadProfile() {
+
+    const profile = getProfile();
+
+    fullName.value = profile.name;
+    email.value = profile.email;
+    phone.value = profile.phone;
+
+}
+
+loadProfile();
+
+// ===========================
+// Load Saved Photo
+// ===========================
+
+const savedPhoto = getProfilePhoto();
+
+if(savedPhoto){
+
+    profileImage.src = savedPhoto;
+
+}
+
+
+// ===================================
+// Save Profile
+// ===================================
+
+profileForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    // Clear Errors
+
+    document.querySelectorAll(".error").forEach(function (error) {
+
+        error.textContent = "";
+
+    });
+
+    let valid = true;
+
+    // ===========================
+    // Validation
+    // ===========================
+
+    if (fullName.value.trim() === "") {
+
+        document.getElementById("nameError").textContent =
+        "Full name is required.";
+
+        valid = false;
+
+    }
+
+    if (email.value.trim() === "") {
+
+        document.getElementById("emailError").textContent =
+        "Email is required.";
+
+        valid = false;
+
+    }
+
+    else if (!email.value.includes("@")) {
+
+        document.getElementById("emailError").textContent =
+        "Enter a valid email.";
+
+        valid = false;
+
+    }
+
+    if (phone.value.length < 11) {
+
+        document.getElementById("phoneError").textContent =
+        "Enter a valid phone number.";
+
+        valid = false;
+
+    }
+
+    if (!valid) {
+
+        return;
+
+    }
+
+    // ===========================
+    // Save To Local Storage
+    // ===========================
+
+    saveProfile({
+
+        name: fullName.value,
+
+        email: email.value,
+
+        phone: phone.value
+
+    });
+
+    // ===========================
+    // Success Message
+    // ===========================
+
+    successMessage.style.display = "block";
+
+    setTimeout(function () {
+
+        successMessage.style.display = "none";
+
+    }, 2000);
 
 });
 
-// ==============================
-// Change Password
-// ==============================
+// ===========================
+// Change Photo
+// ===========================
 
-passwordBtn.addEventListener("click", function () {
+changePhotoBtn.addEventListener("click",function(){
 
-    alert("Change Password feature coming soon.");
-
-});
-
-// ==============================
-// Settings
-// ==============================
-
-settingsBtn.addEventListener("click", function () {
-
-    window.location.href = "settings.html";
+    imageInput.click();
 
 });
 
-// ==============================
+imageInput.addEventListener("change",function(){
+
+    const file = imageInput.files[0];
+
+    if(!file){
+
+        return;
+
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+        profileImage.src = event.target.result;
+
+        saveProfilePhoto(event.target.result);
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+// ===================================
 // Logout
-// ==============================
+// ===================================
+
+const logoutBtn =
+document.getElementById("logoutBtn");
 
 logoutBtn.addEventListener("click", function () {
 
     const confirmLogout = confirm(
+
         "Are you sure you want to logout?"
+
     );
 
-    if (confirmLogout) {
+    if (!confirmLogout) {
 
-        window.location.href = "login.html";
+        return;
 
     }
+
+    // Redirect to login page
+    window.location.href = "login.html";
 
 });

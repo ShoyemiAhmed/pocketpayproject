@@ -243,66 +243,74 @@ confirmBtn.addEventListener("click", function(){
 
 
 
-    setTimeout(function(){
+  setTimeout(function () {
 
+    loadingModal.style.display = "none";
 
-        loadingModal.style.display = "none";
+    const amount = Number(amountInput.value);
 
+    const recipient = recipientInput.value;
 
+    const bank = bankInput.value;
 
-        const amount =
-        Number(amountInput.value);
+    const total = amount + transferFee;
 
+    // =====================================
+    // Check Wallet Balance
+    // =====================================
 
-        const total =
-        amount + transferFee;
+    if (amount > getBalance()) {
 
+        alert("Insufficient wallet balance.");
 
+        return;
 
-        const reference =
-        "PP" + Date.now();
+    }
 
+    // =====================================
+    // Deduct Wallet Balance
+    // =====================================
 
+    deductMoney(amount);
 
-        receiptReference.textContent =
-        reference;
+    // =====================================
+    // Save Transaction
+    // =====================================
 
+    saveTransaction({
 
+        type: "transfer",
 
-        receiptRecipient.textContent =
-        recipientInput.value;
+        title: "Transfer to " + recipient,
 
+        amount: amount,
 
+        bank: bank,
 
-        receiptBank.textContent =
-        bankInput.value;
+        date: new Date().toLocaleString()
 
+    });
 
+    // Generate Reference
 
-        receiptAmount.textContent =
+    const reference = "PP" + Date.now();
+
+    receiptReference.textContent = reference;
+
+    receiptRecipient.textContent = recipient;
+
+    receiptBank.textContent = bank;
+
+    receiptAmount.textContent =
         "₦" + amount.toLocaleString();
 
-
-
-        receiptTotal.textContent =
+    receiptTotal.textContent =
         "₦" + total.toLocaleString();
 
+    successModal.style.display = "flex";
 
-
-        successModal.style.display =
-        "flex";
-
-
-
-    },2000);
-
-
-
+}, 2000);  
 });
-
-
-
-
 // ===============================
 // Back To Dashboard
 // ===============================

@@ -212,6 +212,40 @@ confirmBtn.addEventListener("click", function () {
 
         const method = paymentMethod.value;
 
+// =====================================
+// Update Wallet Balance
+// =====================================
+
+addMoney(amount);
+
+  // =====================================
+// Update Wallet Balance
+// =====================================
+
+addMoney(amount);
+
+        // =====================================
+// Update Wallet Balance
+// =====================================
+
+addMoney(amount);
+
+      saveTransaction({
+
+    type: "deposit",
+
+    title: "Wallet Funding",
+
+    amount: amount,
+
+    method: method,
+
+    date: new Date().toLocaleString()
+
+});
+
+  
+
 
         // Generate transaction reference
         const reference = "PP" + Date.now();

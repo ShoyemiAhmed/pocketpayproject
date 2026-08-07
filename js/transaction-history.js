@@ -6,41 +6,6 @@ const transactionList = document.getElementById("transactionList");
 const searchInput = document.getElementById("searchInput");
 const filter = document.getElementById("filter");
 
-// ==============================
-// Transactions
-// ==============================
-
-const transactions = [
-
-    {
-        type: "in",
-        title: "Wallet Funding",
-        amount: 50000,
-        date: "Today • 10:30 AM"
-    },
-
-    {
-        type: "out",
-        title: "Sent to Fojude",
-        amount: 5000,
-        date: "Yesterday • 4:15 PM"
-    },
-
-    {
-        type: "in",
-        title: "Received from Precious",
-        amount: 8500,
-        date: "Monday • 8:40 AM"
-    },
-
-    {
-        type: "out",
-        title: "Bill Payment",
-        amount: 2000,
-        date: "Sunday • 7:10 PM"
-    }
-
-];
 
 // ==============================
 // Display Transactions
@@ -49,6 +14,9 @@ const transactions = [
 function displayTransactions() {
 
     transactionList.innerHTML = "";
+
+    // Get transactions from Local Storage
+    const transactions = getTransactions();
 
     const search = searchInput.value.toLowerCase();
 
@@ -59,13 +27,31 @@ function displayTransactions() {
         const matchesSearch =
             transaction.title.toLowerCase().includes(search);
 
-        const matchesFilter =
-            selectedFilter === "all" ||
-            transaction.type === selectedFilter;
+        let matchesFilter = true;
+
+        if (selectedFilter === "in") {
+
+            matchesFilter =
+                transaction.type === "deposit";
+
+        }
+
+        if (selectedFilter === "out") {
+
+            matchesFilter =
+                transaction.type === "transfer" ||
+                transaction.type === "airtime";
+
+        }
 
         return matchesSearch && matchesFilter;
 
     });
+
+
+    // ==============================
+    // Empty State
+    // ==============================
 
     if (filteredTransactions.length === 0) {
 
@@ -85,59 +71,72 @@ function displayTransactions() {
 
     }
 
+
+    // ==============================
+    // Display Transactions
+    // ==============================
+
     filteredTransactions.forEach(function (transaction) {
+
+        const isMoneyIn =
+            transaction.type === "deposit";
 
         transactionList.innerHTML += `
 
-            <div class="transaction">
+        <div class="transaction">
 
-                <div class="left">
+            <div class="left">
 
-                    <div class="icon">
+                <div class="icon">
 
-                        <i class="fa-solid ${transaction.type === "in"
-                            ? "fa-arrow-down"
-                            : "fa-arrow-up"}"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h4>${transaction.title}</h4>
-
-                        <p class="date">${transaction.date}</p>
-
-                    </div>
+                    <i class="fa-solid ${isMoneyIn
+                        ? "fa-arrow-down"
+                        : "fa-arrow-up"}"></i>
 
                 </div>
 
                 <div>
 
-                    <p class="amount ${transaction.type === "in"
-                        ? "money-in"
-                        : "money-out"}">
+                    <h4>${transaction.title}</h4>
 
-                        ${transaction.type === "in" ? "+" : "-"}
+                    <p class="date">
 
-                        ₦${transaction.amount.toLocaleString()}
+                        ${transaction.date}
 
                     </p>
-
-                    <span class="status">
-
-                        Completed
-
-                    </span>
 
                 </div>
 
             </div>
+
+            <div>
+
+                <p class="amount ${isMoneyIn
+                    ? "money-in"
+                    : "money-out"}">
+
+                    ${isMoneyIn ? "+" : "-"}
+
+                    ₦${transaction.amount.toLocaleString()}
+
+                </p>
+
+                <span class="status">
+
+                    Completed
+
+                </span>
+
+            </div>
+
+        </div>
 
         `;
 
     });
 
 }
+
 
 // ==============================
 // Events
@@ -146,6 +145,7 @@ function displayTransactions() {
 searchInput.addEventListener("input", displayTransactions);
 
 filter.addEventListener("change", displayTransactions);
+
 
 // ==============================
 // Initial Load

@@ -1,5 +1,5 @@
 /* ===========================
-   Global
+Global
 =========================== */
 
 *{
@@ -19,7 +19,7 @@ body{
 }
 
 /* ===========================
-   Container
+Container
 =========================== */
 
 .container{
@@ -30,83 +30,143 @@ body{
 
 .profile-card{
     width:100%;
-    max-width:420px;
+    max-width:430px;
     background:#fff;
     border-radius:20px;
     padding:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
 /* ===========================
-   Header
+Header
 =========================== */
 
 .header{
     display:flex;
     align-items:center;
     gap:15px;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .back-btn{
-    text-decoration:none;
     color:#2563eb;
-    font-size:20px;
+    font-size:22px;
+    text-decoration:none;
 }
 
 .header h2{
     color:#2563eb;
-    font-size:26px;
+    font-size:28px;
 }
 
 /* ===========================
-   Profile Image
+Profile Image
 =========================== */
 
 .profile-image{
     display:flex;
     justify-content:center;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .profile-image img{
-    width:120px;
-    height:120px;
-    border-radius:50%;
+    width:170px;
+    height:170px;
+    border-radius:5px;
     object-fit:cover;
-    border:4px solid #2563eb;
+    object-position:center top;
+    border:5px solid #2563eb;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
 }
 
 /* ===========================
-   User Info
+Form
 =========================== */
 
-.info{
-    margin-bottom:25px;
+.input-group{
+    margin-bottom:20px;
 }
 
-.info-row{
-    margin-bottom:18px;
-}
-
-.info-row label{
+.input-group label{
     display:block;
-    font-size:13px;
-    color:#777;
-    margin-bottom:5px;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#444;
 }
 
-.info-row p{
-    font-size:17px;
-    font-weight:600;
-    color:#333;
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.input-group input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 8px rgba(37,99,235,.2);
+}
+
+input[readonly]{
+    background:#f3f4f6;
 }
 
 /* ===========================
-   Buttons
+Save Button
+=========================== */
+
+#saveBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:10px;
+}
+
+#saveBtn:hover{
+    background:#1d4ed8;
+}
+
+/* ===========================
+Success
+=========================== */
+
+.success-message{
+    display:none;
+    margin-top:20px;
+    padding:12px;
+    border-radius:10px;
+    background:#dcfce7;
+    color:#15803d;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* ===========================
+Errors
+=========================== */
+
+.error{
+    display:block;
+    margin-top:6px;
+    color:#dc2626;
+    font-size:13px;
+}
+
+/* ===========================
+Action Buttons
 =========================== */
 
 .actions{
+    margin-top:25px;
     display:flex;
     flex-direction:column;
     gap:15px;
@@ -114,41 +174,95 @@ body{
 
 .actions button{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
     border-radius:10px;
     cursor:pointer;
     font-size:15px;
     font-weight:bold;
-    transition:.3s;
     background:#2563eb;
     color:#fff;
+    transition:.3s;
+}
+
+.actions button:hover{
+    background:#1d4ed8;
 }
 
 .actions button i{
     margin-right:8px;
 }
 
-.actions button:hover{
-    transform:translateY(-2px);
-}
-
 .logout{
     background:#dc2626 !important;
 }
 
+.logout:hover{
+    background:#b91c1c !important;
+}
+
 /* ===========================
-   Mobile
+Responsive
 =========================== */
 
 @media(max-width:480px){
 
     .profile-card{
+
         padding:20px;
+
     }
 
     .header h2{
-        font-size:22px;
+
+        font-size:24px;
+
     }
+
+    .profile-image img{
+
+        width:100px;
+        height:100px;
+
+    }
+
+}
+.profile-image{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:30px;
+
+}
+
+.profile-image img{
+
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #2563eb;
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+
+}
+
+#changePhotoBtn{
+
+    margin-top:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+#changePhotoBtn:hover{
+
+    background:#1d4ed8;
 
 }

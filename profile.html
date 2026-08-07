@@ -28,7 +28,8 @@
 
         <div class="header">
 
-            <a href="dashboard.html" class="back-btn">
+            <a href="dashboard.html"
+               class="back-btn">
 
                 <i class="fa-solid fa-arrow-left"></i>
 
@@ -40,72 +41,114 @@
 
         <!-- Profile Image -->
 
-        <div class="profile-image">
+           <div class="profile-image">
 
-            <img src="images/profile.png"
-                 alt="Profile">
+                <img
+             src="images/IMG_1871.PNG"
+             id="profileImage"
+             alt="Profile">
 
-        </div>
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            hidden>
 
-        <!-- User Details -->
+         <button
+             type="button"
+            id="changePhotoBtn">
 
-        <div class="info">
+         <i class="fa-solid fa-camera"></i>
 
-            <div class="info-row">
+              Change Photo
+
+    </button>
+
+</div>
+
+        <!-- Editable Form -->
+
+        <form id="profileForm">
+
+            <div class="input-group">
 
                 <label>Full Name</label>
 
-                <p id="fullName">
-                    Shoyemi Olanrewaju
-                </p>
+                <input
+                    type="text"
+                    id="fullName">
+
+                <small
+                    class="error"
+                    id="nameError"></small>
 
             </div>
 
-            <div class="info-row">
+            <div class="input-group">
 
-                <label>Email</label>
+                <label>Email Address</label>
 
-                <p id="email">
-                    ahmed@email.com
-                </p>
+                <input
+                    type="email"
+                    id="email">
 
-            </div>
-
-            <div class="info-row">
-
-                <label>Phone</label>
-
-                <p id="phone">
-                    +2348165169640
-                </p>
+                <small
+                    class="error"
+                    id="emailError"></small>
 
             </div>
 
-            <div class="info-row">
+            <div class="input-group">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="phone">
+
+                <small
+                    class="error"
+                    id="phoneError"></small>
+
+            </div>
+
+            <div class="input-group">
 
                 <label>Wallet ID</label>
 
-                <p id="walletID">
-                    PP20260001
-                </p>
+                <input
+                    type="text"
+                    id="walletID"
+                    value="PP20260001"
+                    readonly>
 
             </div>
 
-        </div>
+            <button
+                type="submit"
+                id="saveBtn">
 
-        <!-- Buttons -->
+                <i class="fa-solid fa-floppy-disk"></i>
 
-        <div class="actions">
-
-            <button id="editBtn">
-
-                <i class="fa-solid fa-user-pen"></i>
-
-                Edit Profile
+                Save Changes
 
             </button>
 
-            <button id="passwordBtn">
+        </form>
+
+        <p id="successMessage"
+           class="success-message">
+
+            Profile Updated Successfully!
+
+        </p>
+
+        <!-- Quick Actions -->
+
+        <div class="actions">
+
+            <button
+                id="passwordBtn">
 
                 <i class="fa-solid fa-lock"></i>
 
@@ -113,7 +156,8 @@
 
             </button>
 
-            <button id="settingsBtn">
+            <button
+                id="settingsBtn">
 
                 <i class="fa-solid fa-gear"></i>
 
@@ -121,7 +165,9 @@
 
             </button>
 
-            <button id="logoutBtn" class="logout">
+            <button
+                id="logoutBtn"
+                class="logout">
 
                 <i class="fa-solid fa-right-from-bracket"></i>
 
@@ -135,6 +181,7 @@
 
 </div>
 
+<script src="js/storage.js"></script>
 <script src="js/profile.js"></script>
 
 </body>

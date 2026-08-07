@@ -54,32 +54,30 @@ document.getElementById("backDashboardBtn");
 // Live Summary
 // ===========================
 
-function updateSummary(){
+function updateSummary() {
 
     summaryService.textContent =
-    service.value || "-";
+        service.value || "-";
 
     summaryNetwork.textContent =
-    network.value || "-";
+        network.value || "-";
 
     summaryPhone.textContent =
-    phone.value || "-";
+        phone.value || "-";
 
     const value = Number(amount.value);
 
-    if(value > 0){
+    if (value > 0) {
 
         summaryAmount.textContent =
-        "₦" +
-        value.toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
+            "₦" + value.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
 
-    }else{
+    } else {
 
-        summaryAmount.textContent =
-        "₦0.00";
+        summaryAmount.textContent = "₦0.00";
 
     }
 
@@ -94,56 +92,55 @@ amount.addEventListener("input", updateSummary);
 // Form Submit
 // ===========================
 
-form.addEventListener("submit", function(event){
+form.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
-    document.querySelectorAll(".error")
-    .forEach(function(error){
+    document.querySelectorAll(".error").forEach(function (error) {
 
-        error.textContent="";
+        error.textContent = "";
 
     });
 
     let valid = true;
 
-    if(service.value===""){
+    if (service.value === "") {
 
         document.getElementById("serviceError").textContent =
-        "Select a service.";
+            "Select a service.";
 
         valid = false;
 
     }
 
-    if(network.value===""){
+    if (network.value === "") {
 
         document.getElementById("networkError").textContent =
-        "Select a network.";
+            "Select a network.";
 
         valid = false;
 
     }
 
-    if(phone.value.length !==11 || isNaN(phone.value)){
+    if (phone.value.length !== 11 || isNaN(phone.value)) {
 
         document.getElementById("phoneError").textContent =
-        "Enter a valid phone number.";
+            "Enter a valid phone number.";
 
         valid = false;
 
     }
 
-    if(amount.value==="" || Number(amount.value)<=0){
+    if (amount.value === "" || Number(amount.value) <= 0) {
 
         document.getElementById("amountError").textContent =
-        "Enter a valid amount.";
+            "Enter a valid amount.";
 
         valid = false;
 
     }
 
-    if(!valid){
+    if (!valid) {
 
         return;
 
@@ -154,11 +151,11 @@ form.addEventListener("submit", function(event){
     modalPhone.textContent = phone.value;
 
     modalAmount.textContent =
-    "₦" +
-    Number(amount.value).toLocaleString(undefined,{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-    });
+        "₦" +
+        Number(amount.value).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
 
     confirmModal.style.display = "flex";
 
@@ -168,7 +165,7 @@ form.addEventListener("submit", function(event){
 // Cancel
 // ===========================
 
-cancelBtn.addEventListener("click", function(){
+cancelBtn.addEventListener("click", function () {
 
     confirmModal.style.display = "none";
 
@@ -178,25 +175,69 @@ cancelBtn.addEventListener("click", function(){
 // Confirm Purchase
 // ===========================
 
-confirmBtn.addEventListener("click", function(){
+confirmBtn.addEventListener("click", function () {
 
     confirmModal.style.display = "none";
 
     loadingModal.style.display = "flex";
 
-    setTimeout(function(){
+    setTimeout(function () {
 
         loadingModal.style.display = "none";
 
+        const purchaseAmount = Number(amount.value);
+
+        // ===========================
+        // Check Wallet Balance
+        // ===========================
+
+        if (purchaseAmount > getBalance()) {
+
+            alert("Insufficient wallet balance.");
+
+            return;
+
+        }
+
+        // ===========================
+        // Deduct Wallet Balance
+        // ===========================
+
+        deductMoney(purchaseAmount);
+
+        // ===========================
+        // Save Transaction
+        // ===========================
+
+        saveTransaction({
+
+            type: "airtime",
+
+            title: service.value + " Purchase",
+
+            amount: purchaseAmount,
+
+            network: network.value,
+
+            phone: phone.value,
+
+            date: new Date().toLocaleString()
+
+        });
+
+        // ===========================
+        // Receipt
+        // ===========================
+
         reference.textContent =
-        "PP" + Date.now();
+            "PP" + Date.now();
 
         receiptAmount.textContent =
-        "₦" +
-        Number(amount.value).toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
+            "₦" +
+            purchaseAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
 
         successModal.style.display = "flex";
 
@@ -204,7 +245,7 @@ confirmBtn.addEventListener("click", function(){
 
         updateSummary();
 
-    },2000);
+    }, 2000);
 
 });
 
@@ -212,7 +253,7 @@ confirmBtn.addEventListener("click", function(){
 // Dashboard
 // ===========================
 
-backDashboardBtn.addEventListener("click", function(){
+backDashboardBtn.addEventListener("click", function () {
 
     window.location.href = "dashboard.html";
 
