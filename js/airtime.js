@@ -241,6 +241,8 @@ confirmBtn.addEventListener("click", function () {
 
         successModal.style.display = "flex";
 
+        showToast(" Airtime purchase successful!", "success");
+
         form.reset();
 
         updateSummary();

@@ -1,4 +1,8 @@
 // ===============================
+// PocketPay Settings
+// ===============================
+
+// ===============================
 // Elements
 // ===============================
 
@@ -9,49 +13,107 @@ const securityBtn = document.getElementById("securityBtn");
 const aboutBtn = document.getElementById("aboutBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
+const settingsCard = document.querySelector(".settings-card");
+
+
 // ===============================
 // Dark Mode
 // ===============================
 
-darkMode.addEventListener("change", function () {
+function applyDarkMode(enabled) {
 
-    if (darkMode.checked) {
+    if (enabled) {
 
         document.body.style.background = "#121212";
 
-        document.querySelector(".settings-card").style.background = "#1f1f1f";
+        settingsCard.style.background = "#1f1f1f";
 
-        document.querySelector(".settings-card").style.color = "#ffffff";
+        settingsCard.style.color = "#ffffff";
+
+        darkMode.checked = true;
 
     } else {
 
         document.body.style.background = "#f4f7fb";
 
-        document.querySelector(".settings-card").style.background = "#ffffff";
+        settingsCard.style.background = "#ffffff";
 
-        document.querySelector(".settings-card").style.color = "#333333";
+        settingsCard.style.color = "#333333";
+
+        darkMode.checked = false;
+
+    }
+}
+
+
+// Load saved Dark Mode setting
+
+const savedDarkMode =
+    localStorage.getItem("darkMode") === "true";
+
+applyDarkMode(savedDarkMode);
+
+
+// Save Dark Mode setting
+
+darkMode.addEventListener("change", function () {
+
+    const enabled = darkMode.checked;
+
+    localStorage.setItem("darkMode", enabled);
+
+    applyDarkMode(enabled);
+
+    if (enabled) {
+
+        showToast("Dark Mode enabled.", "success");
+
+    } else {
+
+        showToast("Dark Mode disabled.", "info");
 
     }
 
 });
+
 
 // ===============================
 // Notifications
 // ===============================
 
+// Load saved notification setting
+
+const savedNotifications =
+    localStorage.getItem("notifications");
+
+if (savedNotifications !== null) {
+
+    notifications.checked =
+        savedNotifications === "true";
+
+}
+
+
+// Save notification setting
+
 notifications.addEventListener("change", function () {
 
-    if (notifications.checked) {
+    const enabled = notifications.checked;
 
-        alert("Notifications Enabled");
+    localStorage.setItem("notifications", enabled);
+
+    if (enabled) {
+
+        showToast("Notifications enabled.", "success");
 
     } else {
 
-        alert("Notifications Disabled");
+        showToast("Notifications disabled.", "info");
 
     }
 
 });
+
 
 // ===============================
 // Security
@@ -59,9 +121,10 @@ notifications.addEventListener("change", function () {
 
 securityBtn.addEventListener("click", function () {
 
-    alert("Security settings coming soon.");
+    window.location.href = "profile.html";
 
 });
+
 
 // ===============================
 // About PocketPay
@@ -69,11 +132,13 @@ securityBtn.addEventListener("click", function () {
 
 aboutBtn.addEventListener("click", function () {
 
-    alert(
-        "PocketPay v1.0\n\nA modern fintech wallet built with HTML, CSS and JavaScript."
+    showToast(
+        "PocketPay v1.0 — A modern fintech wallet built with HTML, CSS and JavaScript.",
+        "info"
     );
 
 });
+
 
 // ===============================
 // Logout
@@ -85,10 +150,14 @@ logoutBtn.addEventListener("click", function () {
         "Are you sure you want to logout?"
     );
 
-    if (confirmLogout) {
+    if (!confirmLogout) return;
+
+    showToast("Logging out...", "info");
+
+    setTimeout(function () {
 
         window.location.href = "login.html";
 
-    }
+    }, 1000);
 
 });

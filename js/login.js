@@ -1,59 +1,146 @@
+// ===============================
+// PocketPay Login JavaScript
+// ===============================
+
 const form = document.getElementById("loginForm");
 
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
+const loginSuccess = document.getElementById("loginSuccess");
+
+// ===============================
+// Login Form
+// ===============================
+
 form.addEventListener("submit", function (event) {
+
     event.preventDefault();
 
-    // Clear previous errors
-    document.getElementById("emailError").textContent = "";
-    document.getElementById("passwordError").textContent = "";
-    document.getElementById("loginSuccess").textContent = "";
+    // Clear previous messages
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    loginSuccess.textContent = "";
 
     let isValid = true;
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
 
-    // Email validation
+    // ===============================
+    // Email Validation
+    // ===============================
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
 
     if (email === "") {
-        document.getElementById("emailError").textContent =
+
+        emailError.textContent =
             "Email is required.";
+
         isValid = false;
+
     } else if (!emailPattern.test(email)) {
-        document.getElementById("emailError").textContent =
+
+        emailError.textContent =
             "Enter a valid email address.";
+
         isValid = false;
     }
 
-    // Password validation
-    const passwordPattern =
-/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    // ===============================
+    // Password Validation
+    // ===============================
 
     if (password === "") {
-        document.getElementById("passwordError").textContent =
+
+        passwordError.textContent =
             "Password is required.";
-        isValid = false;
-    } else if (!passwordPattern.test(password)) {
-        document.getElementById("passwordError").textContent =
-            "Password must contain uppercase, lowercase, number, special character and be at least 8 characters long.";
+
         isValid = false;
     }
 
-    // Success message
-    if (isValid) {
-        document.getElementById("loginSuccess").textContent =
-            "✅ Login successful!";
+    // ===============================
+    // Stop if validation fails
+    // ===============================
+
+    if (!isValid) {
+        return;
     }
+
+    // ===============================
+    // Get Saved Account
+    // ===============================
+
+    const savedEmail =
+        localStorage.getItem("pocketpayEmail");
+
+    const savedPassword =
+        localStorage.getItem("pocketpayPassword");
+
+    // ===============================
+    // Check Login
+    // ===============================
+
+    if (savedEmail === null || savedPassword === null) {
+
+        emailError.textContent =
+            "No PocketPay account found. Please sign up first.";
+
+        return;
+    }
+
+    if (email !== savedEmail) {
+
+        emailError.textContent =
+            "Email address not found.";
+
+        return;
+    }
+
+    if (password !== savedPassword) {
+
+        passwordError.textContent =
+            "Incorrect password.";
+
+        return;
+    }
+
+    // ===============================
+    // Successful Login
+    // ===============================
+
+    loginSuccess.textContent =
+        "✅ Login successful!";
+
+    // ===============================
+    // Go to Dashboard
+    // ===============================
+
+    setTimeout(function () {
+
+        window.location.href = "dashboard.html";
+
+    }, 1000);
+
 });
 
+// ===============================
+// Show / Hide Password
+// ===============================
+
 function togglePassword(id) {
+
     const input = document.getElementById(id);
 
     if (input.type === "password") {
+
         input.type = "text";
+
     } else {
+
         input.type = "password";
     }
 }

@@ -6,10 +6,11 @@ const balance = document.getElementById("balance");
 const toggleBtn = document.getElementById("toggleBalance");
 
 // ===========================
-// Wallet Balance
+// Wallet Balance Visibility
 // ===========================
 
-let balanceVisible = true;
+let balanceVisible =
+    localStorage.getItem("balanceVisible") !== "false";
 
 function loadBalance() {
 
@@ -23,12 +24,16 @@ function loadBalance() {
                 maximumFractionDigits: 2
             });
 
+        toggleBtn.innerHTML =
+            '<i class="fa-regular fa-eye"></i> Hide Balance';
+
     } else {
 
         balance.textContent = "••••••••••";
 
+        toggleBtn.innerHTML =
+            '<i class="fa-regular fa-eye-slash"></i> Show Balance';
     }
-
 }
 
 loadBalance();
@@ -41,17 +46,10 @@ toggleBtn.addEventListener("click", function () {
 
     balanceVisible = !balanceVisible;
 
-    if (balanceVisible) {
-
-        toggleBtn.innerHTML =
-            '<i class="fa-regular fa-eye"></i> 👁️ Hide Balance';
-
-    } else {
-
-        toggleBtn.innerHTML =
-            '<i class="fa-regular fa-eye-slash"></i> 👁️ Show Balance';
-
-    }
+    localStorage.setItem(
+        "balanceVisible",
+        balanceVisible
+    );
 
     loadBalance();
 
@@ -170,51 +168,52 @@ function loadRecentTransactions() {
     });
 
 }
+
 loadRecentTransactions();
 
 // =====================================
 // Dynamic Greeting
 // =====================================
 
- function loadGreeting(){
+function loadGreeting() {
 
     const greeting =
-    document.getElementById("greeting");
+        document.getElementById("greeting");
 
-    if(!greeting){
+    if (!greeting) {
 
         return;
 
     }
 
     const hour =
-    new Date().getHours();
+        new Date().getHours();
 
-    let message="";
+    let message = "";
 
-    if(hour<12){
+    if (hour < 12) {
 
-        message="Good Morning";
-
-    }
-
-    else if(hour<18){
-
-        message="Good Afternoon";
+        message = "Good Morning";
 
     }
 
-    else{
+    else if (hour < 18) {
 
-        message="Good Evening";
+        message = "Good Afternoon";
+
+    }
+
+    else {
+
+        message = "Good Evening";
 
     }
 
     const profile =
-    getProfile();
+        getProfile();
 
     greeting.textContent =
-    `${message}, ${profile.name} 👋`;
+        `${message}, ${profile.name}`;
 
 }
 
@@ -225,12 +224,14 @@ loadGreeting();
 // =====================================
 
 const dashboardProfileImage =
-document.getElementById("dashboardProfileImage");
+    document.getElementById("dashboardProfileImage");
 
-const savedPhoto = getProfilePhoto();
+const savedPhoto =
+    getProfilePhoto();
 
-if(savedPhoto){
+if (savedPhoto && dashboardProfileImage) {
 
-    dashboardProfileImage.src = savedPhoto;
+    dashboardProfileImage.src =
+        savedPhoto;
 
 }

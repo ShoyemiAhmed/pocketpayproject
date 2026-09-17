@@ -261,7 +261,7 @@ confirmBtn.addEventListener("click", function(){
 
     if (amount > getBalance()) {
 
-        alert("Insufficient wallet balance.");
+        showToast("Insufficient wallet balance.", "error");
 
         return;
 
@@ -308,6 +308,8 @@ confirmBtn.addEventListener("click", function(){
         "₦" + total.toLocaleString();
 
     successModal.style.display = "flex";
+
+    showToast("Money sent successfully!", "success");
 
 }, 2000);  
 });

@@ -134,6 +134,8 @@ profileForm.addEventListener("submit", function (event) {
 
     successMessage.style.display = "block";
 
+    showToast("Profile updated successfully!", "success");
+
     setTimeout(function () {
 
         successMessage.style.display = "none";
@@ -200,4 +202,91 @@ logoutBtn.addEventListener("click", function () {
     // Redirect to login page
     window.location.href = "login.html";
 
+});
+
+// ===============================
+// Settings
+// ===============================
+
+const settingsBtn = document.getElementById("settingsBtn");
+
+settingsBtn.addEventListener("click", function () {
+    window.location.href = "settings.html";
+});
+
+// ===============================
+// Change Password
+// ===============================
+
+const passwordBtn = document.getElementById("passwordBtn");
+
+passwordBtn.addEventListener("click", function () {
+
+    const currentPassword = prompt("Enter your current password:");
+
+    if (currentPassword === null) return;
+
+    const savedPassword =
+        localStorage.getItem("pocketpayPassword");
+
+    // First-time password setup
+    if (savedPassword === null) {
+
+        showToast(
+            "No password has been set yet.",
+            "warning"
+        );
+
+        return;
+    }
+
+    if (currentPassword !== savedPassword) {
+
+        showToast(
+            "Current password is incorrect.",
+            "error"
+        );
+
+        return;
+    }
+
+    const newPassword = prompt("Enter your new password:");
+
+    if (newPassword === null) return;
+
+    if (newPassword.length < 6) {
+
+        showToast(
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+    const confirmPassword = prompt(
+        "Confirm your new password:"
+    );
+
+    if (confirmPassword === null) return;
+
+    if (newPassword !== confirmPassword) {
+
+        showToast(
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "pocketpayPassword",
+        newPassword
+    );
+
+    showToast(
+        "Password changed successfully!",
+        "success"
+    );
 });

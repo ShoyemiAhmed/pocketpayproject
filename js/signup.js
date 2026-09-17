@@ -11,7 +11,6 @@ const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 
 const agreeTerms = document.getElementById("agreeTerms");
-
 const signupBtn = document.getElementById("signupBtn");
 const successMessage = document.getElementById("successMessage");
 
@@ -38,7 +37,6 @@ function togglePassword(id) {
     } else {
         input.type = "password";
     }
-
 }
 
 // ===============================
@@ -49,9 +47,7 @@ form.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
-    // Clear old messages
-
-    document.querySelectorAll(".error").forEach(error => {
+    document.querySelectorAll(".error").forEach(function (error) {
         error.textContent = "";
     });
 
@@ -60,9 +56,9 @@ form.addEventListener("submit", function (event) {
 
     let isValid = true;
 
-    // ==========================
+    // ===============================
     // Full Name
-    // ==========================
+    // ===============================
 
     if (fullname.value.trim() === "") {
 
@@ -70,12 +66,11 @@ form.addEventListener("submit", function (event) {
             "Full name is required.";
 
         isValid = false;
-
     }
 
-    // ==========================
+    // ===============================
     // Email
-    // ==========================
+    // ===============================
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -92,15 +87,11 @@ form.addEventListener("submit", function (event) {
             "Enter a valid email address.";
 
         isValid = false;
-
     }
 
-    // ==========================
+    // ===============================
     // Nigerian Phone Number
-    // User enters only 10 digits
-    // Example:
-    // 8123456789
-    // ==========================
+    // ===============================
 
     const phonePattern = /^[789][01]\d{8}$/;
 
@@ -117,12 +108,11 @@ form.addEventListener("submit", function (event) {
             "Enter a valid Nigerian phone number.";
 
         isValid = false;
-
     }
 
-    // ==========================
+    // ===============================
     // Password
-    // ==========================
+    // ===============================
 
     const passwordPattern =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
@@ -140,12 +130,11 @@ form.addEventListener("submit", function (event) {
             "Password must be at least 8 characters and include uppercase, lowercase, number and special character.";
 
         isValid = false;
-
     }
 
-    // ==========================
+    // ===============================
     // Confirm Password
-    // ==========================
+    // ===============================
 
     if (confirmPassword.value === "") {
 
@@ -160,12 +149,11 @@ form.addEventListener("submit", function (event) {
             "Passwords do not match.";
 
         isValid = false;
-
     }
 
-    // ==========================
+    // ===============================
     // Terms
-    // ==========================
+    // ===============================
 
     if (!agreeTerms.checked) {
 
@@ -173,12 +161,11 @@ form.addEventListener("submit", function (event) {
             "You must agree to the Terms & Conditions.";
 
         isValid = false;
-
     }
 
-    // ==========================
-    // Success
-    // ==========================
+    // ===============================
+    // Create Account
+    // ===============================
 
     if (isValid) {
 
@@ -187,10 +174,34 @@ form.addEventListener("submit", function (event) {
 
         setTimeout(function () {
 
+            // Save user profile
+            const profile = {
+                name: fullname.value.trim(),
+                email: email.value.trim(),
+                phone: phone.value.trim()
+            };
+
+            localStorage.setItem(
+                "profile",
+                JSON.stringify(profile)
+            );
+
+            // Save login credentials
+            localStorage.setItem(
+                "pocketpayEmail",
+                email.value.trim()
+            );
+
+            localStorage.setItem(
+                "pocketpayPassword",
+                password.value
+            );
+
             signupBtn.disabled = false;
             signupBtn.textContent = "Create Account";
 
             successMessage.style.display = "block";
+
             successMessage.textContent =
                 "🎉 Account created successfully!";
 
@@ -199,7 +210,6 @@ form.addEventListener("submit", function (event) {
             signupBtn.disabled = true;
 
         }, 2000);
-
     }
 
 });

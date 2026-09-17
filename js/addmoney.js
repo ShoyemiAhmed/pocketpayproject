@@ -274,6 +274,8 @@ addMoney(amount);
         // Show success receipt
         successModal.style.display = "flex";
 
+        showToast("Money added successfully!", "success");
+
 
         // Reset form
         form.reset();
