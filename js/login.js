@@ -108,9 +108,13 @@ form.addEventListener("submit", function (event) {
         return;
     }
 
+    
+
     // ===============================
     // Successful Login
     // ===============================
+
+    loginUser();
 
     loginSuccess.textContent =
         "✅ Login successful!";

@@ -1,22 +1,12 @@
-// ===============================
-// PocketPay Signup JavaScript
-// ===============================
-
 const form = document.getElementById("signupForm");
-
 const fullname = document.getElementById("fullname");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
-
 const agreeTerms = document.getElementById("agreeTerms");
 const signupBtn = document.getElementById("signupBtn");
 const successMessage = document.getElementById("successMessage");
-
-// ===============================
-// Disable button until terms accepted
-// ===============================
 
 signupBtn.disabled = true;
 
@@ -24,12 +14,7 @@ agreeTerms.addEventListener("change", function () {
     signupBtn.disabled = !this.checked;
 });
 
-// ===============================
-// Show / Hide Password
-// ===============================
-
 function togglePassword(id) {
-
     const input = document.getElementById(id);
 
     if (input.type === "password") {
@@ -39,12 +24,7 @@ function togglePassword(id) {
     }
 }
 
-// ===============================
-// Form Validation
-// ===============================
-
 form.addEventListener("submit", function (event) {
-
     event.preventDefault();
 
     document.querySelectorAll(".error").forEach(function (error) {
@@ -56,117 +36,82 @@ form.addEventListener("submit", function (event) {
 
     let isValid = true;
 
-    // ===============================
-    // Full Name
-    // ===============================
-
+    /* FULL NAME */
     if (fullname.value.trim() === "") {
-
         document.getElementById("fullnameError").textContent =
             "Full name is required.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Email
-    // ===============================
-
+    /* EMAIL */
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email.value.trim() === "") {
-
         document.getElementById("emailError").textContent =
             "Email is required.";
 
         isValid = false;
-
     } else if (!emailPattern.test(email.value.trim())) {
-
         document.getElementById("emailError").textContent =
             "Enter a valid email address.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Nigerian Phone Number
-    // ===============================
-
+    /* PHONE */
     const phonePattern = /^[789][01]\d{8}$/;
 
     if (phone.value.trim() === "") {
-
         document.getElementById("phoneError").textContent =
             "Phone number is required.";
 
         isValid = false;
-
     } else if (!phonePattern.test(phone.value.trim())) {
-
         document.getElementById("phoneError").textContent =
             "Enter a valid Nigerian phone number.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Password
-    // ===============================
-
+    /* PASSWORD */
     const passwordPattern =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (password.value === "") {
-
         document.getElementById("passwordError").textContent =
             "Password is required.";
 
         isValid = false;
-
     } else if (!passwordPattern.test(password.value)) {
-
         document.getElementById("passwordError").textContent =
             "Password must be at least 8 characters and include uppercase, lowercase, number and special character.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Confirm Password
-    // ===============================
-
+    /* CONFIRM PASSWORD */
     if (confirmPassword.value === "") {
-
         document.getElementById("confirmPasswordError").textContent =
             "Please confirm your password.";
 
         isValid = false;
-
     } else if (password.value !== confirmPassword.value) {
-
         document.getElementById("confirmPasswordError").textContent =
             "Passwords do not match.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Terms
-    // ===============================
-
+    /* TERMS */
     if (!agreeTerms.checked) {
-
         document.getElementById("termsError").textContent =
             "You must agree to the Terms & Conditions.";
 
         isValid = false;
     }
 
-    // ===============================
-    // Create Account
-    // ===============================
-
+    /* CREATE ACCOUNT */
     if (isValid) {
 
         signupBtn.disabled = true;
@@ -174,42 +119,45 @@ form.addEventListener("submit", function (event) {
 
         setTimeout(function () {
 
-            // Save user profile
             const profile = {
                 name: fullname.value.trim(),
                 email: email.value.trim(),
                 phone: phone.value.trim()
             };
 
+            /* SAVE PROFILE */
             localStorage.setItem(
                 "profile",
                 JSON.stringify(profile)
             );
 
-            // Save login credentials
+            /* SAVE LOGIN EMAIL */
             localStorage.setItem(
                 "pocketpayEmail",
                 email.value.trim()
             );
 
+            /* SAVE PASSWORD */
             localStorage.setItem(
                 "pocketpayPassword",
                 password.value
             );
 
-            signupBtn.disabled = false;
-            signupBtn.textContent = "Create Account";
-
+            /* SHOW SUCCESS MESSAGE */
             successMessage.style.display = "block";
-
             successMessage.textContent =
-                "🎉 Account created successfully!";
+                "🎉 Account created successfully! Redirecting to login...";
 
-            form.reset();
+            signupBtn.textContent = "Account Created";
 
-            signupBtn.disabled = true;
+            /*
+             * REDIRECT TO LOGIN PAGE
+             * after 1.5 seconds
+             */
+            setTimeout(function () {
+                window.location.href = "login.html";
+            }, 1500);
 
         }, 2000);
     }
-
 });

@@ -156,7 +156,7 @@ logoutBtn.addEventListener("click", function () {
 
     setTimeout(function () {
 
-        window.location.href = "login.html";
+        logoutUser();
 
     }, 1000);
 
