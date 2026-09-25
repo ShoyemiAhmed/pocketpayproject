@@ -1,308 +1,683 @@
+/* =================================
+   POCKETPAY AUTH
+   LOGIN + SIGN UP
+   FINAL UI POLISH
+================================= */
+
+/* =================================
+   RESET
+================================= */
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing:border-box;
-    font-family: "poppins";
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
+
+/* =================================
+   BODY
+================================= */
 
 body {
-    background: #011835;
-    display:flex;
-    justify-content:center ;
-    align-items: center;
     min-height: 100vh;
+    padding: 25px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(37, 99, 235, 0.28),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(14, 165, 233, 0.16),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #011835 0%,
+            #062d5c 55%,
+            #0b3b75 100%
+        );
+
+    color: #1e293b;
 }
 
+/* =================================
+   MAIN CONTAINER
+================================= */
+
 .container {
-    width: 200%;
+    width: 100%;
     max-width: 450px;
-    background: #fff;
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    background: rgba(255, 255, 255, 0.98);
+
+    padding: 36px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.25),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    animation: authAppear 0.45s ease;
 }
+
+@keyframes authAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =================================
+   LOGO
+================================= */
+
+.logo {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.logo img {
+    width: 105px;
+    max-width: 120px;
+    height: auto;
+
+    display: block;
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+/* =================================
+   HEADINGS
+================================= */
 
 .container h1 {
     text-align: center;
-    color: #2563EB;
-    margin-bottom: 1px;
+
+    color: #2563eb;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    margin-bottom: 8px;
 }
 
-.container p {
+.container > p {
     text-align: center;
-    color: #0f0f0f;
-    margin-bottom: 18px;
+
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    margin-bottom: 25px;
 }
+
+/* =================================
+   FORM
+================================= */
 
 form {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    margin-bottom: 6px;
-    font-weight: 500;
-}
+    display: block;
 
-input {
-    padding: 12px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline:none;
-    font-size: 15px;
-}
+    margin-bottom: 7px;
 
-input:focus {
-    border-color: #e0e3eb;
-}
+    color: #334155;
 
-button {
-    background: #2563EB;
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #1E40AF;
-}
-
-a {
-    color: #2563EB;
-    text-decoration: none;
+    font-size: 14px;
     font-weight: 600;
 }
 
+/* =================================
+   INPUTS
+================================= */
+
+input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 6px;
+
+    border: 1px solid #d5dbe5;
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1e293b;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:hover {
+    border-color: #b8c2d1;
+}
+
+input:focus {
+    border-color: #2563eb;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* =================================
+   PASSWORD BOX
+================================= */
+
+.password-box {
+    position: relative;
+
+    width: 100%;
+}
+
+.password-box input {
+    width: 100%;
+
+    padding: 13px 45px 13px 14px;
+
+    border: 1px solid #d5dbe5;
+
+    border-radius: 11px;
+
+    margin-bottom: 6px;
+}
+
+.password-box input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* Password Eye */
+
+.toggle-password {
+    position: absolute;
+
+    right: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    color: #64748b;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.toggle-password:hover {
+    color: #2563eb;
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+/* =================================
+   PHONE INPUT
+================================= */
+
+.phone-input {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    border: 1px solid #d5dbe5;
+
+    border-radius: 11px;
+
+    overflow: hidden;
+
+    margin-bottom: 15px;
+
+    background: #ffffff;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.phone-input:hover {
+    border-color: #b8c2d1;
+}
+
+.phone-input:focus-within {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.phone-input span {
+    flex-shrink: 0;
+
+    background: #f1f5f9;
+
+    padding: 13px 14px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+    color: #2563eb;
+
+    border-right: 1px solid #e2e8f0;
+}
+
+.phone-input input {
+    border: none;
+
+    margin: 0;
+
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+.phone-input input:hover {
+    border: none;
+}
+
+.phone-input input:focus {
+    border: none;
+
+    box-shadow: none;
+}
+
+/* =================================
+   BUTTON
+================================= */
+
+button {
+    width: 100%;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 11px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+
+    margin-top: 8px;
+}
+
+button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+button:active {
+    transform: scale(0.98);
+
+    box-shadow: none;
+}
+
+button:disabled {
+    background: #94a3b8;
+
+    opacity: 0.75;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+/* =================================
+   SIGNUP BUTTON
+================================= */
+
+#signupBtn {
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+#signupBtn:disabled {
+    background: #94a3b8;
+
+    cursor: not-allowed;
+
+    opacity: 0.7;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+/* =================================
+   LINKS
+================================= */
+
+a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
 a:hover {
+    color: #1d4ed8;
+
     text-decoration: underline;
 }
 
-.logo {
-    text-align: center;
-    margin: 20px auto;
-}
-
-.logo img {
-        width: 100px;
-        border-radius: 1%;
-        max-width: 120px;
-        display: block;
-        margin: 0 auto;
-        height: auto;
-}
-
-.password-box {
-    position:relative;
-    width: 100%;
- }
- 
-.password-box input {
-    width: 100%;
-    padding-right: 12px 45px 12px 12px;
-    border:1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    outline: none;
-  }
-
-  .password-box input:focus{
-    border-color:#2563Eb;
-  }
-    
-.toggle-password{
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    color: #666;
-}
-
-@media screen and (max-width: 400px){
-
-.container{
-        width:95%;
-        padding:25px;
-}
-
-h1{
-        font-size:2rem;
-}
-
-label{
-        font-size:18px;
-}
-
-input{
-        font: size 1px;
-        padding:12px;
-}
-
-button{
-        padding:14px;
-        font-size:16px;
-}
-
-}
+/* =================================
+   ERROR MESSAGE
+================================= */
 
 .error {
-    color: #f50f0f;
-    font-size: 20px;
+    color: #dc2626;
+
+    font-size: 13px;
+
     display: block;
-    margin-top: 5px;
+
+    margin-top: 4px;
     margin-bottom: 10px;
+
     font-weight: 500;
+
+    line-height: 1.4;
 }
 
-.success{
+/* =================================
+   SUCCESS MESSAGE
+================================= */
+
+.success {
     margin-top: 15px;
-    padding: 12px;
-    border-radius: 8px;
-    background-color:#d4edda;
-    color:#155724;
-    font-weight:600;
-    text-align:center;
-    margin-bottom:15px;
-    display:none;
-}
+    margin-bottom: 15px;
 
-.phone-input{
-    display:flex;
-    align-items:center;
-    border:1px solid #ccc;
-    border-radius:8px;
-    overflow:hidden;
-    margin-bottom:15px;
-}
+    padding: 13px;
 
-.phone-input span{
-    background:#f3f4f6;
-    padding:12px 15px;
-    font-weight:600;
-    font-size:15px;
-    color:#2563EB;
-}
+    border-radius: 11px;
 
-.phone-input input{
-    border:none;
-    flex:1;
-    margin:0;
-    outline:none;
-}
-.container{
-    width: 900px;
-    max-width: 450px;
-    margin:auto;
-    background: #fff;
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-.logo {
+    background: #ecfdf5;
+
+    border: 1px solid #bbf7d0;
+
+    color: #15803d;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
     text-align: center;
-    margin-bottom: 20px;
+
+    display: none;
 }
-.logo img {
-    width: 100px;
-    border-radius: 1%;
-    max-width: 120px;
-}
-.login-form{
+
+/* =================================
+   LOGIN FORM
+================================= */
+
+.login-form {
     text-align: left;
 }
-/* Mobile Responsiveness */
+
+/* =================================
+   CHECKBOX / TERMS
+================================= */
+
+input[type="checkbox"] {
+    width: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    accent-color: #2563eb;
+
+    cursor: pointer;
+}
+
+/* =================================
+   LOADING SPINNER
+================================= */
+
+.spinner {
+    display: inline-block;
+
+    width: 18px;
+    height: 18px;
+
+    border: 3px solid rgba(255, 255, 255, 0.4);
+
+    border-top: 3px solid #ffffff;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+
+    margin-right: 8px;
+
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =================================
+   TABLET
+================================= */
+
 @media (max-width: 768px) {
 
+    body {
+        padding: 20px 18px;
+    }
+
     .container {
-        width: 95%;
-        padding: 25px;
-        margin: 20px auto;
+        max-width: 450px;
+
+        padding: 32px 30px;
+
+        border-radius: 20px;
     }
 
     .logo img {
-        width: 120px;
+        width: 100px;
     }
 
-    h1 {
-        font-size: 28px;
-        text-align: center;
+    .container h1 {
+        font-size: 26px;
+    }
+}
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+
+        align-items: center;
     }
 
-    p {
-        text-align: center;
-        font-size: 15px;
-    }
-
-    input {
+    .container {
         width: 100%;
-        font-size: 15px;
+
+        padding: 27px 20px;
+
+        border-radius: 18px;
     }
 
-    button {
-        width: 100%;
-        font-size: 16px;
+    .logo {
+        margin-bottom: 18px;
+    }
+
+    .logo img {
+        width: 90px;
+    }
+
+    .container h1 {
+        font-size: 24px;
+    }
+
+    .container > p {
+        font-size: 13px;
+
+        margin-bottom: 22px;
+    }
+
+    label {
+        font-size: 13px;
+    }
+
+    input,
+    .password-box input {
+        padding: 12px 13px;
+
+        font-size: 14px;
+
+        border-radius: 10px;
     }
 
     .password-box input {
-        width: 100%;
+        padding-right: 42px;
     }
 
     .toggle-password {
-        right: 15px;
+        right: 13px;
+
+        font-size: 16px;
     }
 
-    .phone-input {
-        width: 100%;
-    }
-}
-.spinner{
-    display:inline-block;
-    width:18px;
-    height:18px;
-    border:3px solid rgba(255,255,255,.4);
-    border-top:3px solid #fff;
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-    margin-right:8px;
-    vertical-align:middle;
-}
+    button {
+        padding: 13px;
 
-@keyframes spin{
+        font-size: 15px;
 
-    from{
-        transform:rotate(0deg);
+        border-radius: 10px;
     }
 
-    to{
-        transform:rotate(360deg);
+    .phone-input span {
+        padding: 12px;
+
+        font-size: 13px;
     }
 
+    .error {
+        font-size: 12px;
+    }
+
+    .success {
+        font-size: 13px;
+
+        padding: 11px;
+    }
 }
 
-button:disabled{
-    opacity:.7;
-    cursor:not-allowed;
-}
-/* Disabled Signup Button */
+/* =================================
+   VERY SMALL PHONES
+================================= */
 
-#signupBtn:disabled{
+@media (max-width: 360px) {
 
-    background:#94a3b8;
+    body {
+        padding: 10px;
+    }
 
-    cursor:not-allowed;
+    .container {
+        padding: 23px 17px;
+    }
 
-    opacity:.7;
+    .container h1 {
+        font-size: 22px;
+    }
 
-}
+    .container > p {
+        font-size: 12px;
+    }
 
-#signupBtn{
+    .logo img {
+        width: 85px;
+    }
 
-    transition:.3s;
+    input,
+    .password-box input {
+        font-size: 13px;
+    }
 
+    button {
+        font-size: 14px;
+    }
 }

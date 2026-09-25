@@ -6,6 +6,8 @@
     <title>PocketPay Dashboard</title>
 
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/notifications.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +34,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <div class="icons">
 
-    <i class="fa-regular fa-bell"></i>
+    <div class="notification-wrapper">
+
+    <i
+        id="notificationBell"
+        class="fa-regular fa-bell"
+        title="Notifications"
+    ></i>
+
+    <span
+        id="notificationBadge"
+        class="notification-badge"
+    >
+        0
+    </span>
+
+</div>
 
     <a href="profile.html">
 
@@ -124,7 +141,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
            </section>
 
-          <!-- Paste Here -->
+          <!-- Bottom Navigation -->
 
 <nav class="bottom-nav">
 
@@ -156,14 +173,56 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 
 </div>
-
+<script src="js/theme.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/notifications.js"></script>
 
 <script>
     requireLogin();
 </script>
+
+
+<!-- =================================
+     NOTIFICATION PANEL
+================================= -->
+
+<div
+    id="notificationPanel"
+    class="notification-panel"
+>
+
+    <div class="notification-header">
+
+        <h2>Notifications</h2>
+
+        <div class="notification-header-actions">
+
+            <button
+                id="markAllNotifications"
+                title="Mark all as read"
+            >
+                <i class="fa-solid fa-check-double"></i>
+            </button>
+
+            <button
+                id="closeNotifications"
+                title="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="notificationList"
+        class="notification-list"
+    ></div>
+
+</div>
 
 </body>
 </html>

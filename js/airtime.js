@@ -9,46 +9,74 @@ const network = document.getElementById("network");
 const phone = document.getElementById("phone");
 const amount = document.getElementById("amount");
 
+
 // ===========================
 // Summary
 // ===========================
 
-const summaryService = document.getElementById("summaryService");
-const summaryNetwork = document.getElementById("summaryNetwork");
-const summaryPhone = document.getElementById("summaryPhone");
-const summaryAmount = document.getElementById("summaryAmount");
+const summaryService =
+    document.getElementById("summaryService");
+
+const summaryNetwork =
+    document.getElementById("summaryNetwork");
+
+const summaryPhone =
+    document.getElementById("summaryPhone");
+
+const summaryAmount =
+    document.getElementById("summaryAmount");
+
 
 // ===========================
 // Confirmation Modal
 // ===========================
 
-const confirmModal = document.getElementById("confirmModal");
+const confirmModal =
+    document.getElementById("confirmModal");
 
-const modalService = document.getElementById("modalService");
-const modalNetwork = document.getElementById("modalNetwork");
-const modalPhone = document.getElementById("modalPhone");
-const modalAmount = document.getElementById("modalAmount");
+const modalService =
+    document.getElementById("modalService");
 
-const cancelBtn = document.getElementById("cancelBtn");
-const confirmBtn = document.getElementById("confirmBtn");
+const modalNetwork =
+    document.getElementById("modalNetwork");
+
+const modalPhone =
+    document.getElementById("modalPhone");
+
+const modalAmount =
+    document.getElementById("modalAmount");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
+
+const confirmBtn =
+    document.getElementById("confirmBtn");
+
 
 // ===========================
 // Loading Modal
 // ===========================
 
-const loadingModal = document.getElementById("loadingModal");
+const loadingModal =
+    document.getElementById("loadingModal");
+
 
 // ===========================
 // Success Modal
 // ===========================
 
-const successModal = document.getElementById("successModal");
+const successModal =
+    document.getElementById("successModal");
 
-const reference = document.getElementById("reference");
-const receiptAmount = document.getElementById("receiptAmount");
+const reference =
+    document.getElementById("reference");
+
+const receiptAmount =
+    document.getElementById("receiptAmount");
 
 const backDashboardBtn =
-document.getElementById("backDashboardBtn");
+    document.getElementById("backDashboardBtn");
+
 
 // ===========================
 // Live Summary
@@ -65,201 +93,368 @@ function updateSummary() {
     summaryPhone.textContent =
         phone.value || "-";
 
-    const value = Number(amount.value);
+
+    const value =
+        Number(amount.value);
+
 
     if (value > 0) {
 
         summaryAmount.textContent =
-            "₦" + value.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+            "₦" +
+            value.toLocaleString(
+                undefined,
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
 
     } else {
 
-        summaryAmount.textContent = "₦0.00";
-
+        summaryAmount.textContent =
+            "₦0.00";
     }
-
 }
 
-service.addEventListener("change", updateSummary);
-network.addEventListener("change", updateSummary);
-phone.addEventListener("input", updateSummary);
-amount.addEventListener("input", updateSummary);
+
+service.addEventListener(
+    "change",
+    updateSummary
+);
+
+network.addEventListener(
+    "change",
+    updateSummary
+);
+
+phone.addEventListener(
+    "input",
+    updateSummary
+);
+
+amount.addEventListener(
+    "input",
+    updateSummary
+);
+
 
 // ===========================
 // Form Submit
 // ===========================
 
-form.addEventListener("submit", function (event) {
+form.addEventListener(
+    "submit",
+    function (event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    document.querySelectorAll(".error").forEach(function (error) {
 
-        error.textContent = "";
+        // Clear previous errors
+        document
+            .querySelectorAll(".error")
+            .forEach(function (error) {
 
-    });
+                error.textContent = "";
 
-    let valid = true;
+            });
 
-    if (service.value === "") {
 
-        document.getElementById("serviceError").textContent =
-            "Select a service.";
+        let valid = true;
 
-        valid = false;
 
+        // Service validation
+        if (service.value === "") {
+
+            document.getElementById(
+                "serviceError"
+            ).textContent =
+                "Select a service.";
+
+            valid = false;
+        }
+
+
+        // Network validation
+        if (network.value === "") {
+
+            document.getElementById(
+                "networkError"
+            ).textContent =
+                "Select a network.";
+
+            valid = false;
+        }
+
+
+        // Phone validation
+        if (
+            phone.value.length !== 11 ||
+            isNaN(phone.value)
+        ) {
+
+            document.getElementById(
+                "phoneError"
+            ).textContent =
+                "Enter a valid phone number.";
+
+            valid = false;
+        }
+
+
+        // Amount validation
+        if (
+            amount.value === "" ||
+            Number(amount.value) <= 0
+        ) {
+
+            document.getElementById(
+                "amountError"
+            ).textContent =
+                "Enter a valid amount.";
+
+            valid = false;
+        }
+
+
+        // Stop if invalid
+        if (!valid) {
+
+            return;
+        }
+
+
+        // ===========================
+        // Confirmation Modal
+        // ===========================
+
+        modalService.textContent =
+            service.value;
+
+        modalNetwork.textContent =
+            network.value;
+
+        modalPhone.textContent =
+            phone.value;
+
+
+        modalAmount.textContent =
+            "₦" +
+            Number(amount.value).toLocaleString(
+                undefined,
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
+
+        confirmModal.style.display =
+            "flex";
     }
+);
 
-    if (network.value === "") {
-
-        document.getElementById("networkError").textContent =
-            "Select a network.";
-
-        valid = false;
-
-    }
-
-    if (phone.value.length !== 11 || isNaN(phone.value)) {
-
-        document.getElementById("phoneError").textContent =
-            "Enter a valid phone number.";
-
-        valid = false;
-
-    }
-
-    if (amount.value === "" || Number(amount.value) <= 0) {
-
-        document.getElementById("amountError").textContent =
-            "Enter a valid amount.";
-
-        valid = false;
-
-    }
-
-    if (!valid) {
-
-        return;
-
-    }
-
-    modalService.textContent = service.value;
-    modalNetwork.textContent = network.value;
-    modalPhone.textContent = phone.value;
-
-    modalAmount.textContent =
-        "₦" +
-        Number(amount.value).toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-
-    confirmModal.style.display = "flex";
-
-});
 
 // ===========================
 // Cancel
 // ===========================
 
-cancelBtn.addEventListener("click", function () {
+cancelBtn.addEventListener(
+    "click",
+    function () {
 
-    confirmModal.style.display = "none";
+        confirmModal.style.display =
+            "none";
+    }
+);
 
-});
 
 // ===========================
 // Confirm Purchase
 // ===========================
 
-confirmBtn.addEventListener("click", function () {
+confirmBtn.addEventListener(
+    "click",
+    function () {
 
-    confirmModal.style.display = "none";
+        confirmModal.style.display =
+            "none";
 
-    loadingModal.style.display = "flex";
 
-    setTimeout(function () {
+        // Show processing
+        loadingModal.style.display =
+            "flex";
 
-        loadingModal.style.display = "none";
 
-        const purchaseAmount = Number(amount.value);
+        setTimeout(function () {
 
-        // ===========================
-        // Check Wallet Balance
-        // ===========================
+            loadingModal.style.display =
+                "none";
 
-        if (purchaseAmount > getBalance()) {
 
-            alert("Insufficient wallet balance.");
+            const purchaseAmount =
+                Number(amount.value);
 
-            return;
 
-        }
+            const selectedService =
+                service.value;
 
-        // ===========================
-        // Deduct Wallet Balance
-        // ===========================
+            const selectedNetwork =
+                network.value;
 
-        deductMoney(purchaseAmount);
+            const selectedPhone =
+                phone.value;
 
-        // ===========================
-        // Save Transaction
-        // ===========================
 
-        saveTransaction({
+            // ===========================
+            // Check Wallet Balance
+            // ===========================
 
-            type: "airtime",
+            if (
+                purchaseAmount >
+                getBalance()
+            ) {
 
-            title: service.value + " Purchase",
+                showToast(
+                    "Insufficient wallet balance.",
+                    "error"
+                );
 
-            amount: purchaseAmount,
+                return;
+            }
 
-            network: network.value,
 
-            phone: phone.value,
+            // ===========================
+            // Deduct Wallet Balance
+            // ===========================
 
-            date: new Date().toLocaleString()
+            deductMoney(
+                purchaseAmount
+            );
 
-        });
 
-        // ===========================
-        // Receipt
-        // ===========================
+            // ===========================
+            // Save Transaction
+            // ===========================
 
-        reference.textContent =
-            "PP" + Date.now();
+            saveTransaction({
 
-        receiptAmount.textContent =
-            "₦" +
-            purchaseAmount.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                type: "airtime",
+
+                title:
+                    selectedService +
+                    " Purchase",
+
+                amount:
+                    purchaseAmount,
+
+                network:
+                    selectedNetwork,
+
+                phone:
+                    selectedPhone,
+
+                date:
+                    new Date().toLocaleString()
+
             });
 
-        successModal.style.display = "flex";
 
-        showToast(" Airtime purchase successful!", "success");
+              // ===========================
+              // CREATE NOTIFICATION
+              // ===========================
 
-        form.reset();
+                 const purchaseType =
+                 selectedService.toLowerCase().includes("data")
+                 ? "Data"
+                 : "Airtime";
 
-        updateSummary();
+                 addNotification(
 
-    }, 2000);
+                 purchaseType + " Purchase Successful",
 
-});
+                 "₦" +
+                  purchaseAmount.toLocaleString(
+                  undefined,
+               {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+             }
+              ) +
+             " " +
+             purchaseType.toLowerCase() +
+              " purchase was successful for " +
+              selectedPhone +
+             " on " +
+              selectedNetwork +
+              ".",
+
+             "money"
+            );
+
+
+            // ===========================
+            // Receipt
+            // ===========================
+
+            reference.textContent =
+                "PP" + Date.now();
+
+
+            receiptAmount.textContent =
+                "₦" +
+                purchaseAmount.toLocaleString(
+                    undefined,
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+
+            // ===========================
+            // Show Success
+            // ===========================
+
+            successModal.style.display =
+                "flex";
+
+
+            // ===========================
+            // Toast
+            // ===========================
+
+            showToast(
+                "Airtime purchase successful!",
+                "success"
+            );
+
+
+            // Reset form
+            form.reset();
+
+            updateSummary();
+
+
+        }, 2000);
+
+    }
+);
+
 
 // ===========================
 // Dashboard
 // ===========================
 
-backDashboardBtn.addEventListener("click", function () {
+backDashboardBtn.addEventListener(
+    "click",
+    function () {
 
-    window.location.href = "dashboard.html";
+        window.location.href =
+            "dashboard.html";
+    }
+);
 
-});
 
 // ===========================
 // Start

@@ -44,281 +44,374 @@ const receiptBank = document.getElementById("receiptBank");
 const receiptAmount = document.getElementById("receiptAmount");
 const receiptTotal = document.getElementById("receiptTotal");
 
-const backDashboardBtn = document.getElementById("backDashboardBtn");
+const backDashboardBtn =
+    document.getElementById("backDashboardBtn");
 
 
 // ===============================
 // Loading Modal
 // ===============================
 
-const loadingModal = document.getElementById("loadingModal");
-
+const loadingModal =
+    document.getElementById("loadingModal");
 
 
 // ===============================
 // Live Transfer Summary
 // ===============================
 
-function updateSummary(){
+function updateSummary() {
 
     summaryRecipient.textContent =
         recipientInput.value || "-";
 
-
     summaryBank.textContent =
         bankInput.value || "-";
 
+    const amount =
+        Number(amountInput.value);
 
-    const amount = Number(amountInput.value);
-
-
-    if(amount > 0){
+    if (amount > 0) {
 
         summaryAmount.textContent =
-        "₦" + amount.toLocaleString();
-
+            "₦" +
+            amount.toLocaleString();
 
         summaryTotal.textContent =
-        "₦" + (amount + transferFee).toLocaleString();
-
+            "₦" +
+            (amount + transferFee).toLocaleString();
 
     } else {
 
-        summaryAmount.textContent = "₦0.00";
-        summaryTotal.textContent = "₦10.00";
+        summaryAmount.textContent =
+            "₦0.00";
 
+        summaryTotal.textContent =
+            "₦10.00";
     }
-
 }
 
 
-recipientInput.addEventListener("input", updateSummary);
+recipientInput.addEventListener(
+    "input",
+    updateSummary
+);
 
-bankInput.addEventListener("change", updateSummary);
+bankInput.addEventListener(
+    "change",
+    updateSummary
+);
 
-amountInput.addEventListener("input", updateSummary);
-
+amountInput.addEventListener(
+    "input",
+    updateSummary
+);
 
 
 // ===============================
 // Form Validation
 // ===============================
 
-form.addEventListener("submit", function(event){
+form.addEventListener(
+    "submit",
+    function (event) {
 
-    event.preventDefault();
+        event.preventDefault();
+
+        // Clear previous errors
+        document
+            .querySelectorAll(".error")
+            .forEach(error => {
+                error.textContent = "";
+            });
+
+        let isValid = true;
+
+        const recipient =
+            recipientInput.value.trim();
+
+        const bank =
+            bankInput.value;
+
+        const accountNumber =
+            document
+                .getElementById("accountNumber")
+                .value
+                .trim();
+
+        const amount =
+            amountInput.value.trim();
 
 
-    // Clear previous errors
+        // Recipient validation
+        if (recipient === "") {
 
-    document.querySelectorAll(".error").forEach(error=>{
-        error.textContent="";
-    });
+            document.getElementById(
+                "recipientError"
+            ).textContent =
+                "Recipient name is required.";
 
-
-    let isValid = true;
-
-
-    const recipient =
-    recipientInput.value.trim();
+            isValid = false;
+        }
 
 
-    const bank =
-    bankInput.value;
+        // Bank validation
+        if (bank === "") {
+
+            document.getElementById(
+                "bankError"
+            ).textContent =
+                "Please select a bank.";
+
+            isValid = false;
+        }
 
 
-    const accountNumber =
-    document.getElementById("accountNumber").value.trim();
+        // Account number validation
+        if (
+            accountNumber.length !== 10 ||
+            isNaN(accountNumber)
+        ) {
+
+            document.getElementById(
+                "accountError"
+            ).textContent =
+                "Account number must be 10 digits.";
+
+            isValid = false;
+        }
 
 
-    const amount =
-    amountInput.value.trim();
+        // Amount validation
+        if (
+            amount === "" ||
+            Number(amount) <= 0
+        ) {
+
+            document.getElementById(
+                "amountError"
+            ).textContent =
+                "Enter a valid amount.";
+
+            isValid = false;
+        }
 
 
+        // ===============================
+        // Open Confirmation Modal
+        // ===============================
 
-    if(recipient === ""){
+        if (isValid) {
 
-        document.getElementById("recipientError").textContent =
-        "Recipient name is required.";
+            modalRecipient.textContent =
+                recipient;
 
-        isValid = false;
+            modalBank.textContent =
+                bank;
 
+            const total =
+                Number(amount) + transferFee;
+
+            modalAmount.textContent =
+                "₦" +
+                Number(amount).toLocaleString();
+
+            modalTotal.textContent =
+                "₦" +
+                total.toLocaleString();
+
+            confirmModal.style.display =
+                "flex";
+        }
     }
-
-
-
-    if(bank === ""){
-
-        document.getElementById("bankError").textContent =
-        "Please select a bank.";
-
-        isValid = false;
-
-    }
-
-
-
-    if(accountNumber.length !== 10 || isNaN(accountNumber)){
-
-        document.getElementById("accountError").textContent =
-        "Account number must be 10 digits.";
-
-        isValid = false;
-
-    }
-
-
-
-    if(amount === "" || Number(amount)<=0){
-
-        document.getElementById("amountError").textContent =
-        "Enter a valid amount.";
-
-        isValid = false;
-
-    }
-
-
-
-    // Open confirmation modal
-
-    if(isValid){
-
-
-        modalRecipient.textContent = recipient;
-
-        modalBank.textContent = bank;
-
-
-        const total =
-        Number(amount) + transferFee;
-
-
-
-        modalAmount.textContent =
-        "₦" + Number(amount).toLocaleString();
-
-
-        modalTotal.textContent =
-        "₦" + total.toLocaleString();
-
-
-
-        confirmModal.style.display = "flex";
-
-    }
-
-
-});
-
-
+);
 
 
 // ===============================
 // Cancel Transfer
 // ===============================
 
-cancelBtn.addEventListener("click", function(){
+cancelBtn.addEventListener(
+    "click",
+    function () {
 
-    confirmModal.style.display = "none";
-
-});
-
-
+        confirmModal.style.display =
+            "none";
+    }
+);
 
 
 // ===============================
 // Confirm Transfer
 // ===============================
 
-confirmBtn.addEventListener("click", function(){
+confirmBtn.addEventListener(
+    "click",
+    function () {
+
+        confirmModal.style.display =
+            "none";
+
+        // Show processing screen
+        loadingModal.style.display =
+            "flex";
 
 
-    confirmModal.style.display = "none";
+        setTimeout(function () {
+
+            loadingModal.style.display =
+                "none";
+
+            const amount =
+                Number(amountInput.value);
+
+            const recipient =
+                recipientInput.value.trim();
+
+            const bank =
+                bankInput.value;
+
+            const total =
+                amount + transferFee;
 
 
-    // Show processing screen
+            // =====================================
+            // Check Wallet Balance
+            // =====================================
 
-    loadingModal.style.display = "flex";
+            if (amount > getBalance()) {
+
+                showToast(
+                    "Insufficient wallet balance.",
+                    "error"
+                );
+
+                return;
+            }
 
 
+            // =====================================
+            // Deduct Wallet Balance
+            // =====================================
 
-  setTimeout(function () {
+            deductMoney(amount);
 
-    loadingModal.style.display = "none";
 
-    const amount = Number(amountInput.value);
+            // =====================================
+            // Save Transaction
+            // =====================================
 
-    const recipient = recipientInput.value;
+            saveTransaction({
 
-    const bank = bankInput.value;
+                type: "transfer",
 
-    const total = amount + transferFee;
+                title:
+                    "Transfer to " +
+                    recipient,
 
-    // =====================================
-    // Check Wallet Balance
-    // =====================================
+                amount:
+                    amount,
 
-    if (amount > getBalance()) {
+                bank:
+                    bank,
 
-        showToast("Insufficient wallet balance.", "error");
+                date:
+                    new Date().toLocaleString()
+            });
 
-        return;
 
+            // =====================================
+            // CREATE NOTIFICATION
+            // =====================================
+
+            addNotification(
+
+                "Transfer Successful",
+
+                "₦" +
+                    amount.toLocaleString(
+                        undefined,
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    ) +
+                    " was sent successfully to " +
+                    recipient +
+                    ".",
+
+                "money"
+            );
+
+
+            // =====================================
+            // Generate Reference
+            // =====================================
+
+            const reference =
+                "PP" + Date.now();
+
+            receiptReference.textContent =
+                reference;
+
+            receiptRecipient.textContent =
+                recipient;
+
+            receiptBank.textContent =
+                bank;
+
+            receiptAmount.textContent =
+                "₦" +
+                amount.toLocaleString(
+                    undefined,
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+            receiptTotal.textContent =
+                "₦" +
+                total.toLocaleString(
+                    undefined,
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+
+            // =====================================
+            // Show Success Modal
+            // =====================================
+
+            successModal.style.display =
+                "flex";
+
+
+            // =====================================
+            // Toast
+            // =====================================
+
+            showToast(
+                "Money sent successfully!",
+                "success"
+            );
+
+        }, 2000);
     }
+);
 
-    // =====================================
-    // Deduct Wallet Balance
-    // =====================================
 
-    deductMoney(amount);
-
-    // =====================================
-    // Save Transaction
-    // =====================================
-
-    saveTransaction({
-
-        type: "transfer",
-
-        title: "Transfer to " + recipient,
-
-        amount: amount,
-
-        bank: bank,
-
-        date: new Date().toLocaleString()
-
-    });
-
-    // Generate Reference
-
-    const reference = "PP" + Date.now();
-
-    receiptReference.textContent = reference;
-
-    receiptRecipient.textContent = recipient;
-
-    receiptBank.textContent = bank;
-
-    receiptAmount.textContent =
-        "₦" + amount.toLocaleString();
-
-    receiptTotal.textContent =
-        "₦" + total.toLocaleString();
-
-    successModal.style.display = "flex";
-
-    showToast("Money sent successfully!", "success");
-
-}, 2000);  
-});
 // ===============================
 // Back To Dashboard
 // ===============================
 
-backDashboardBtn.addEventListener("click", function(){
+backDashboardBtn.addEventListener(
+    "click",
+    function () {
 
-    window.location.href = "dashboard.html";
-
-});
+        window.location.href =
+            "dashboard.html";
+    }
+);

@@ -21,27 +21,12 @@ const settingsCard = document.querySelector(".settings-card");
 // ===============================
 
 function applyDarkMode(enabled) {
-
     if (enabled) {
-
-        document.body.style.background = "#121212";
-
-        settingsCard.style.background = "#1f1f1f";
-
-        settingsCard.style.color = "#ffffff";
-
+        document.body.classList.add("dark-mode");
         darkMode.checked = true;
-
     } else {
-
-        document.body.style.background = "#f4f7fb";
-
-        settingsCard.style.background = "#ffffff";
-
-        settingsCard.style.color = "#333333";
-
+        document.body.classList.remove("dark-mode");
         darkMode.checked = false;
-
     }
 }
 

@@ -1,10 +1,5 @@
 // =====================================
-// PocketPay - Add Money
-// =====================================
-
-
-// =====================================
-// FORM ELEMENTS
+// POCKETPAY - ADD MONEY
 // =====================================
 
 const form = document.getElementById("addMoneyForm");
@@ -12,20 +7,12 @@ const form = document.getElementById("addMoneyForm");
 const amountInput = document.getElementById("amount");
 const paymentMethod = document.getElementById("paymentMethod");
 
-
-// =====================================
-// SUMMARY ELEMENTS
-// =====================================
-
+// Summary
 const summaryAmount = document.getElementById("summaryAmount");
 const summaryMethod = document.getElementById("summaryMethod");
 const summaryTotal = document.getElementById("summaryTotal");
 
-
-// =====================================
-// CONFIRMATION MODAL
-// =====================================
-
+// Confirmation Modal
 const confirmModal = document.getElementById("confirmModal");
 
 const modalAmount = document.getElementById("modalAmount");
@@ -35,269 +22,366 @@ const modalTotal = document.getElementById("modalTotal");
 const cancelBtn = document.getElementById("cancelBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 
-
-// =====================================
-// PROCESSING MODAL
-// =====================================
-
+// Loading Modal
 const loadingModal = document.getElementById("loadingModal");
 
-
-// =====================================
-// SUCCESS RECEIPT
-// =====================================
-
+// Success Modal
 const successModal = document.getElementById("successModal");
 
-const receiptReference = document.getElementById("receiptReference");
-const receiptAmount = document.getElementById("receiptAmount");
-const receiptMethod = document.getElementById("receiptMethod");
-const receiptTotal = document.getElementById("receiptTotal");
+const receiptReference =
+    document.getElementById("receiptReference");
 
-const backDashboardBtn = document.getElementById("backDashboardBtn");
+const receiptAmount =
+    document.getElementById("receiptAmount");
 
+const receiptMethod =
+    document.getElementById("receiptMethod");
+
+const receiptTotal =
+    document.getElementById("receiptTotal");
+
+const backDashboardBtn =
+    document.getElementById("backDashboardBtn");
 
 
 // =====================================
-// LIVE SUMMARY
+// FORMAT MONEY
 // =====================================
 
-function updateSummary(){
-
-    const amount = Number(amountInput.value);
-
-    if(amount > 0){
-
-        summaryAmount.textContent =
-        "₦" + amount.toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
-
-        summaryTotal.textContent =
-        "₦" + amount.toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
-
-    }
-
-    else{
-
-        summaryAmount.textContent = "₦0.00";
-        summaryTotal.textContent = "₦0.00";
-
-    }
-
-    summaryMethod.textContent =
-    paymentMethod.value || "-";
-
+function formatMoney(amount) {
+    return "₦" + Number(amount).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
-
 
 
 // =====================================
 // UPDATE SUMMARY
 // =====================================
 
-amountInput.addEventListener("input", updateSummary);
+function updateSummary() {
 
-paymentMethod.addEventListener("change", updateSummary);
+    const amount = Number(amountInput.value);
 
+    if (amount > 0) {
 
+        summaryAmount.textContent =
+            formatMoney(amount);
+
+        summaryTotal.textContent =
+            formatMoney(amount);
+
+    } else {
+
+        summaryAmount.textContent =
+            "₦0.00";
+
+        summaryTotal.textContent =
+            "₦0.00";
+    }
+
+    summaryMethod.textContent =
+        paymentMethod.value || "-";
+}
 
 
 // =====================================
-// FORM VALIDATION
+// LIVE SUMMARY
 // =====================================
 
-form.addEventListener("submit", function(event){
+amountInput.addEventListener(
+    "input",
+    updateSummary
+);
 
-    event.preventDefault();
-
-
-    // Clear previous errors
-
-    document.querySelectorAll(".error").forEach(function(error){
-
-        error.textContent = "";
-
-    });
+paymentMethod.addEventListener(
+    "change",
+    updateSummary
+);
 
 
-    let isValid = true;
+// =====================================
+// FORM SUBMIT
+// =====================================
+
+form.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+        // Clear previous errors
+        document
+            .querySelectorAll(".error")
+            .forEach(function (error) {
+                error.textContent = "";
+            });
+
+        let isValid = true;
+
+        const amount =
+            Number(amountInput.value);
+
+        const method =
+            paymentMethod.value;
 
 
-    const amount = amountInput.value.trim();
+        // Validate amount
+        if (
+            amountInput.value.trim() === "" ||
+            amount <= 0
+        ) {
 
-    const method = paymentMethod.value;
+            document.getElementById(
+                "amountError"
+            ).textContent =
+                "Please enter a valid amount.";
 
-
-
-    if(amount === "" || Number(amount) <= 0){
-
-        document.getElementById("amountError").textContent =
-        "Please enter a valid amount.";
-
-        isValid = false;
-
-    }
-
+            isValid = false;
+        }
 
 
-    if(method === ""){
+        // Validate payment method
+        if (method === "") {
 
-        document.getElementById("paymentError").textContent =
-        "Please select a payment method.";
+            document.getElementById(
+                "paymentError"
+            ).textContent =
+                "Please select a payment method.";
 
-        isValid = false;
-
-    }
-
+            isValid = false;
+        }
 
 
-    if(isValid){
+        if (!isValid) {
+            return;
+        }
+
+
+        // =================================
+        // SHOW CONFIRMATION
+        // =================================
 
         modalAmount.textContent =
-        "₦" + Number(amount).toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
+            formatMoney(amount);
 
-        modalMethod.textContent = method;
+        modalMethod.textContent =
+            method;
 
         modalTotal.textContent =
-        "₦" + Number(amount).toLocaleString(undefined,{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
+            formatMoney(amount);
 
-        confirmModal.style.display = "flex";
-
+        confirmModal.style.display =
+            "flex";
     }
+);
 
-});
+
 // =====================================
-// CANCEL DEPOSIT
+// CANCEL CONFIRMATION
 // =====================================
 
-cancelBtn.addEventListener("click", function () {
+cancelBtn.addEventListener(
+    "click",
+    function () {
 
-    confirmModal.style.display = "none";
-
-});
-
+        confirmModal.style.display =
+            "none";
+    }
+);
 
 
 // =====================================
 // CONFIRM DEPOSIT
 // =====================================
 
-confirmBtn.addEventListener("click", function () {
+confirmBtn.addEventListener(
+    "click",
+    function () {
 
-    // Hide confirmation modal
-    confirmModal.style.display = "none";
+        // Close confirmation
+        confirmModal.style.display =
+            "none";
 
-    // Show processing screen
-    loadingModal.style.display = "flex";
-
-
-    setTimeout(function () {
-
-        // Hide processing
-        loadingModal.style.display = "none";
+        // Show processing
+        loadingModal.style.display =
+            "flex";
 
 
-        const amount = Number(amountInput.value);
-
-        const method = paymentMethod.value;
-
-// =====================================
-// Update Wallet Balance
-// =====================================
-
-addMoney(amount);
-
-  // =====================================
-// Update Wallet Balance
-// =====================================
-
-addMoney(amount);
-
-        // =====================================
-// Update Wallet Balance
-// =====================================
-
-addMoney(amount);
-
-      saveTransaction({
-
-    type: "deposit",
-
-    title: "Wallet Funding",
-
-    amount: amount,
-
-    method: method,
-
-    date: new Date().toLocaleString()
-
-});
-
-  
+        // Prevent double clicks
+        confirmBtn.disabled = true;
 
 
-        // Generate transaction reference
-        const reference = "PP" + Date.now();
+        setTimeout(
+            function () {
+
+                try {
+
+                    const amount =
+                        Number(amountInput.value);
+
+                    const method =
+                        paymentMethod.value;
 
 
-        receiptReference.textContent = reference;
+                    // =================================
+                    // 1. UPDATE WALLET BALANCE
+                    // =================================
+
+                    addMoney(amount);
 
 
-        receiptAmount.textContent =
-            "₦" + amount.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+                    // =================================
+                    // 2. SAVE TRANSACTION
+                    // =================================
+
+                    saveTransaction({
+
+                        type: "deposit",
+
+                        title: "Wallet Funding",
+
+                        amount: amount,
+
+                        method: method,
+
+                        date:
+                            new Date().toLocaleString()
+                    });
 
 
-        receiptMethod.textContent = method;
+                    // =================================
+                    // 3. CREATE NOTIFICATION
+                    // =================================
+
+                    if (
+                        typeof addNotification ===
+                        "function"
+                    ) {
+
+                        addNotification(
+                            "Deposit Successful",
+
+                            formatMoney(amount) +
+                            " has been added to your PocketPay wallet.",
+
+                            "success"
+                        );
+                    }
 
 
-        receiptTotal.textContent =
-            "₦" + amount.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+                    // =================================
+                    // 4. GENERATE REFERENCE
+                    // =================================
+
+                    const reference =
+                        "PP" + Date.now();
 
 
-        // Show success receipt
-        successModal.style.display = "flex";
+                    receiptReference.textContent =
+                        reference;
 
-        showToast("Money added successfully!", "success");
+                    receiptAmount.textContent =
+                        formatMoney(amount);
+
+                    receiptMethod.textContent =
+                        method;
+
+                    receiptTotal.textContent =
+                        formatMoney(amount);
 
 
-        // Reset form
-        form.reset();
+                    // =================================
+                    // 5. HIDE PROCESSING
+                    // =================================
+
+                    loadingModal.style.display =
+                        "none";
 
 
-        // Reset summary
-        summaryAmount.textContent = "₦0.00";
-        summaryMethod.textContent = "-";
-        summaryTotal.textContent = "₦0.00";
+                    // =================================
+                    // 6. SHOW SUCCESS
+                    // =================================
 
-    }, 2000);
+                    successModal.style.display =
+                        "flex";
 
-});
 
+                    // =================================
+                    // 7. TOAST
+                    // =================================
+
+                    if (
+                        typeof showToast ===
+                        "function"
+                    ) {
+
+                        showToast(
+                            "Money added successfully!",
+                            "success"
+                        );
+                    }
+
+
+                    // =================================
+                    // 8. RESET FORM
+                    // =================================
+
+                    form.reset();
+
+                    summaryAmount.textContent =
+                        "₦0.00";
+
+                    summaryMethod.textContent =
+                        "-";
+
+                    summaryTotal.textContent =
+                        "₦0.00";
+
+
+                } catch (error) {
+
+                    // =================================
+                    // IF ANYTHING GOES WRONG
+                    // =================================
+
+                    console.error(
+                        "Deposit Error:",
+                        error
+                    );
+
+                    loadingModal.style.display =
+                        "none";
+
+                    showToast(
+                        "Something went wrong while processing the deposit.",
+                        "error"
+                    );
+
+                } finally {
+
+                    confirmBtn.disabled =
+                        false;
+                }
+
+            },
+
+            2000
+        );
+    }
+);
 
 
 // =====================================
 // BACK TO DASHBOARD
 // =====================================
 
-backDashboardBtn.addEventListener("click", function () {
+backDashboardBtn.addEventListener(
+    "click",
+    function () {
 
-    window.location.href = "dashboard.html";
-
-});
+        window.location.href =
+            "dashboard.html";
+    }
+);

@@ -1,0 +1,250 @@
+/* =================================
+   POCKETPAY GLOBAL THEME
+   DARK MODE
+================================= */
+
+/* =================================
+   LIGHT MODE VARIABLES
+================================= */
+
+:root {
+    --bg-color: #f4f7fc;
+    --card-color: #ffffff;
+    --text-color: #1e293b;
+    --heading-color: #0f172a;
+    --muted-color: #64748b;
+    --border-color: #e2e8f0;
+    --input-bg: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.97);
+    --shadow-color: rgba(0, 0, 0, 0.06);
+}
+
+/* =================================
+   DARK MODE VARIABLES
+================================= */
+
+body.dark-mode {
+    --bg-color: #0f172a;
+    --card-color: #1e293b;
+    --text-color: #e2e8f0;
+    --heading-color: #f8fafc;
+    --muted-color: #94a3b8;
+    --border-color: #334155;
+    --input-bg: #1e293b;
+    --nav-bg: rgba(15, 23, 42, 0.97);
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+/* =================================
+   BODY
+================================= */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+/* =================================
+   COMMON CARDS
+================================= */
+
+body.dark-mode .action-card,
+body.dark-mode .transaction,
+body.dark-mode .settings-card,
+body.dark-mode .profile-card,
+body.dark-mode .card,
+body.dark-mode .form-card {
+    background-color: var(--card-color);
+    color: var(--text-color);
+
+    border-color: var(--border-color);
+
+    box-shadow:
+        0 8px 20px var(--shadow-color);
+}
+
+/* =================================
+   HEADINGS
+================================= */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: var(--heading-color);
+}
+
+/* =================================
+   PARAGRAPHS / MUTED TEXT
+================================= */
+
+body.dark-mode p,
+body.dark-mode small {
+    color: var(--muted-color);
+}
+
+/* =================================
+   INPUTS
+================================= */
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: var(--input-bg);
+
+    color: var(--text-color);
+
+    border-color: var(--border-color);
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #64748b;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+    border-color: #2563eb;
+}
+
+/* =================================
+   LINKS
+================================= */
+
+body.dark-mode a {
+    color: #60a5fa;
+}
+
+/* =================================
+   TRANSACTION TEXT
+================================= */
+
+body.dark-mode .transaction-info h4 {
+    color: var(--heading-color);
+}
+
+body.dark-mode .transaction-info small {
+    color: var(--muted-color);
+}
+
+/* =================================
+   QUICK ACTIONS
+================================= */
+
+body.dark-mode .quick-actions h3,
+body.dark-mode .section-header h3 {
+    color: var(--heading-color);
+}
+
+body.dark-mode .action-card p {
+    color: var(--text-color);
+}
+
+/* =================================
+   BOTTOM NAVIGATION
+================================= */
+
+body.dark-mode .bottom-nav {
+    background: var(--nav-bg);
+
+    border-top: 1px solid var(--border-color);
+
+    box-shadow:
+        0 -5px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .bottom-nav a {
+    color: var(--muted-color);
+}
+
+body.dark-mode .bottom-nav a.active,
+body.dark-mode .bottom-nav a:hover {
+    color: #60a5fa;
+}
+
+/* =================================
+   SETTINGS
+================================= */
+
+body.dark-mode .settings-item {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .settings-item h3,
+body.dark-mode .settings-item h4 {
+    color: var(--heading-color);
+}
+
+body.dark-mode .settings-item p {
+    color: var(--muted-color);
+}
+
+/* =================================
+   PHONE INPUT
+================================= */
+
+body.dark-mode .phone-input {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .phone-input span {
+    background-color: #334155;
+    border-color: #475569;
+}
+
+/* =================================
+   MODALS
+================================= */
+
+body.dark-mode .modal,
+body.dark-mode .modal-content {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+body.dark-mode .modal h2,
+body.dark-mode .modal h3 {
+    color: var(--heading-color);
+}
+
+/* =================================
+   TOAST
+================================= */
+
+body.dark-mode .toast {
+    background-color: #1e293b;
+
+    color: #e2e8f0;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* =================================
+   SMOOTH TRANSITIONS
+================================= */
+
+body.dark-mode .action-card,
+body.dark-mode .transaction,
+body.dark-mode .settings-card,
+body.dark-mode .profile-card,
+body.dark-mode .card,
+body.dark-mode .form-card,
+body.dark-mode .bottom-nav,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
