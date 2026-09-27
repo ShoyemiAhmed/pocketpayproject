@@ -332,3 +332,136 @@ button:hover{
 #backDashboardBtn:hover{
     background:#1d4ed8;
 }
+/* =====================================
+   POCKETPAY DEPOSIT RECEIPT
+===================================== */
+
+.receipt-card {
+    width: 100%;
+    max-width: 430px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    border-radius: 20px;
+}
+
+.receipt-top {
+    text-align: center;
+}
+
+.receipt-top h2 {
+    margin: 10px 0 8px;
+}
+
+.receipt-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.receipt-brand {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.receipt-brand strong {
+    display: block;
+    font-size: 22px;
+    color: #2563eb;
+}
+
+.receipt-brand span {
+    font-size: 13px;
+    color: #777;
+}
+
+.receipt-details {
+    margin-top: 15px;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 14px;
+}
+
+.receipt-row span {
+    color: #777;
+}
+
+.receipt-row strong {
+    text-align: right;
+    word-break: break-word;
+}
+
+.total-row {
+    margin-top: 5px;
+    padding-top: 16px;
+    border-bottom: none;
+    font-size: 17px;
+}
+
+.total-row strong {
+    color: #2563eb;
+}
+
+.receipt-divider {
+    border-top: 1px dashed #ccc;
+    margin: 20px 0;
+}
+
+.receipt-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.receipt-actions button {
+    width: 100%;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.receipt-primary-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.receipt-secondary-btn {
+    background: #eef2ff;
+    color: #2563eb;
+}
+
+@media (max-width: 480px) {
+
+    .receipt-card {
+        width: 92%;
+        padding: 22px;
+        max-height: 88vh;
+    }
+
+    .receipt-row {
+        font-size: 13px;
+        gap: 12px;
+    }
+
+    .receipt-brand {
+        margin: 20px 0;
+    }
+
+}

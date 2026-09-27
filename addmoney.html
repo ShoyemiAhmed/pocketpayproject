@@ -192,56 +192,155 @@
     </div>
 
     <!-- ===========================
-         Success Receipt
-    ============================ -->
+     DEPOSIT RECEIPT
+     ============================ -->
 
     <div class="success-modal" id="successModal">
 
-        <div class="success-content">
+    <div class="success-content receipt-card">
+
+        <div class="receipt-top">
 
             <i class="fa-solid fa-circle-check success-icon"></i>
 
             <h2>Deposit Successful</h2>
 
-            <p>
-
-                <strong>Reference:</strong>
-
-                <span id="receiptReference"></span>
-
+            <p class="receipt-status">
+                <i class="fa-solid fa-check"></i>
+                Completed
             </p>
 
-            <p>
+        </div>
 
-                <strong>Amount:</strong>
 
-                <span id="receiptAmount"></span>
+        <div class="receipt-brand">
 
-            </p>
+            <strong>PocketPay</strong>
 
-            <p>
+            <span>
+                Deposit Receipt
+            </span>
 
-                <strong>Method:</strong>
+        </div>
 
-                <span id="receiptMethod"></span>
 
-            </p>
+        <div class="receipt-details">
 
-            <p>
+            <div class="receipt-row">
 
-                <strong>Total Credited:</strong>
+                <span>Reference</span>
 
-                <span id="receiptTotal"></span>
+                <strong id="receiptReference">
+                    -
+                </strong>
 
-            </p>
+            </div>
 
-            <button type="button" id="backDashboardBtn">
+
+            <div class="receipt-row">
+
+                <span>Amount</span>
+
+                <strong id="receiptAmount">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>Payment Method</span>
+
+                <strong id="receiptMethod">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>Processing Fee</span>
+
+                <strong>
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row total-row">
+
+                <span>Total Credited</span>
+
+                <strong id="receiptTotal">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>Date</span>
+
+                <strong id="receiptDate">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-divider"></div>
+
+
+        <div class="receipt-actions">
+
+            <button
+                type="button"
+                id="downloadReceiptBtn"
+                class="receipt-secondary-btn"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Save Receipt
+
+            </button>
+
+
+            <button
+                type="button"
+                id="shareReceiptBtn"
+                class="receipt-secondary-btn"
+            >
+
+                <i class="fa-solid fa-share-nodes"></i>
+
+                Share
+
+            </button>
+
+
+            <button
+                type="button"
+                id="backDashboardBtn"
+                class="receipt-primary-btn"
+            >
 
                 Back to Dashboard
 
             </button>
 
         </div>
+
+    </div>
+
+</div>
+
 
     </div>
 

@@ -41,11 +41,13 @@
 
         </div>
 
+
         <p class="subtitle">
 
             Buy Airtime or Data instantly.
 
         </p>
+
 
         <!-- Form -->
 
@@ -57,17 +59,27 @@
 
                 <select id="service">
 
-                    <option value="">Select Service</option>
+                    <option value="">
+                        Select Service
+                    </option>
 
-                    <option value="Airtime">Airtime</option>
+                    <option value="Airtime">
+                        Airtime
+                    </option>
 
-                    <option value="Data">Data Bundle</option>
+                    <option value="Data">
+                        Data Bundle
+                    </option>
 
                 </select>
 
-                <small class="error" id="serviceError"></small>
+                <small
+                    class="error"
+                    id="serviceError">
+                </small>
 
             </div>
+
 
             <div class="input-group">
 
@@ -75,21 +87,35 @@
 
                 <select id="network">
 
-                    <option value="">Select Network</option>
+                    <option value="">
+                        Select Network
+                    </option>
 
-                    <option value="MTN">MTN</option>
+                    <option value="MTN">
+                        MTN
+                    </option>
 
-                    <option value="Airtel">Airtel</option>
+                    <option value="Airtel">
+                        Airtel
+                    </option>
 
-                    <option value="Glo">Glo</option>
+                    <option value="Glo">
+                        Glo
+                    </option>
 
-                    <option value="9mobile">9mobile</option>
+                    <option value="9mobile">
+                        9mobile
+                    </option>
 
                 </select>
 
-                <small class="error" id="networkError"></small>
+                <small
+                    class="error"
+                    id="networkError">
+                </small>
 
             </div>
+
 
             <div class="input-group">
 
@@ -100,9 +126,13 @@
                     id="phone"
                     placeholder="08012345678">
 
-                <small class="error" id="phoneError"></small>
+                <small
+                    class="error"
+                    id="phoneError">
+                </small>
 
             </div>
+
 
             <div class="input-group">
 
@@ -113,9 +143,13 @@
                     id="amount"
                     placeholder="Enter Amount">
 
-                <small class="error" id="amountError"></small>
+                <small
+                    class="error"
+                    id="amountError">
+                </small>
 
             </div>
+
 
             <button type="submit">
 
@@ -125,41 +159,54 @@
 
         </form>
 
+
         <!-- Purchase Summary -->
 
         <div class="summary-card">
 
             <h3>Purchase Summary</h3>
 
+
             <div class="summary-row">
 
                 <span>Service</span>
 
-                <strong id="summaryService">-</strong>
+                <strong id="summaryService">
+                    -
+                </strong>
 
             </div>
+
 
             <div class="summary-row">
 
                 <span>Network</span>
 
-                <strong id="summaryNetwork">-</strong>
+                <strong id="summaryNetwork">
+                    -
+                </strong>
 
             </div>
+
 
             <div class="summary-row">
 
                 <span>Phone</span>
 
-                <strong id="summaryPhone">-</strong>
+                <strong id="summaryPhone">
+                    -
+                </strong>
 
             </div>
+
 
             <div class="summary-row">
 
                 <span>Amount</span>
 
-                <strong id="summaryAmount">₦0.00</strong>
+                <strong id="summaryAmount">
+                    ₦0.00
+                </strong>
 
             </div>
 
@@ -169,8 +216,9 @@
 
 </div>
 
+
 <!-- ===========================
-     Confirmation Modal
+     CONFIRMATION MODAL
 =========================== -->
 
 <div class="modal" id="confirmModal">
@@ -178,6 +226,7 @@
     <div class="modal-content">
 
         <h2>Confirm Purchase</h2>
+
 
         <p>
 
@@ -187,6 +236,7 @@
 
         </p>
 
+
         <p>
 
             <strong>Network:</strong>
@@ -194,6 +244,7 @@
             <span id="modalNetwork"></span>
 
         </p>
+
 
         <p>
 
@@ -203,6 +254,7 @@
 
         </p>
 
+
         <p>
 
             <strong>Amount:</strong>
@@ -211,15 +263,21 @@
 
         </p>
 
+
         <div class="buttons">
 
-            <button id="cancelBtn">
+            <button
+                type="button"
+                id="cancelBtn">
 
                 Cancel
 
             </button>
 
-            <button id="confirmBtn">
+
+            <button
+                type="button"
+                id="confirmBtn">
 
                 Confirm
 
@@ -231,8 +289,9 @@
 
 </div>
 
+
 <!-- ===========================
-     Loading Modal
+     LOADING MODAL
 =========================== -->
 
 <div class="modal" id="loadingModal">
@@ -241,61 +300,222 @@
 
         <div class="spinner"></div>
 
-        <h2>Processing Purchase...</h2>
+        <h2>
+            Processing Purchase...
+        </h2>
 
-        <p>Please wait...</p>
+        <p>
+            Please wait...
+        </p>
 
     </div>
 
 </div>
 
+
 <!-- ===========================
-     Success Modal
+     AIRTIME / DATA RECEIPT
 =========================== -->
 
 <div class="modal" id="successModal">
 
-    <div class="modal-content success">
+    <div class="modal-content success receipt-card">
 
-        <i class="fa-solid fa-circle-check success-icon"></i>
+        <div class="receipt-top">
 
-        <h2>Purchase Successful</h2>
+            <i class="fa-solid fa-circle-check success-icon"></i>
 
-        <p>
+            <h2>
+                Purchase Successful
+            </h2>
 
-            <strong>Reference:</strong>
+            <p class="receipt-status">
 
-            <span id="reference"></span>
+                <i class="fa-solid fa-check"></i>
 
-        </p>
+                Completed
 
-        <p>
+            </p>
 
-            <strong>Amount:</strong>
+        </div>
 
-            <span id="receiptAmount"></span>
 
-        </p>
+        <div class="receipt-brand">
 
-        <button id="backDashboardBtn">
+            <strong>
+                PocketPay
+            </strong>
 
-            Back to Dashboard
+            <span>
+                Airtime & Data Receipt
+            </span>
 
-        </button>
+        </div>
+
+
+        <div class="receipt-details">
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Reference
+                </span>
+
+                <strong id="reference">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Service
+                </span>
+
+                <strong id="receiptService">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Network
+                </span>
+
+                <strong id="receiptNetwork">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Phone Number
+                </span>
+
+                <strong id="receiptPhone">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Amount
+                </span>
+
+                <strong id="receiptAmount">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row total-row">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="receiptTotal">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <div class="receipt-row">
+
+                <span>
+                    Date
+                </span>
+
+                <strong id="receiptDate">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="receipt-divider"></div>
+
+
+        <div class="receipt-actions">
+
+
+            <button
+                type="button"
+                id="downloadReceiptBtn"
+                class="receipt-secondary-btn">
+
+                <i class="fa-solid fa-download"></i>
+
+                Save Receipt
+
+            </button>
+
+
+            <button
+                type="button"
+                id="shareReceiptBtn"
+                class="receipt-secondary-btn">
+
+                <i class="fa-solid fa-share-nodes"></i>
+
+                Share
+
+            </button>
+
+
+            <button
+                type="button"
+                id="backDashboardBtn"
+                class="receipt-primary-btn">
+
+                Back to Dashboard
+
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- ===========================
+     SCRIPTS
+=========================== -->
+
 <script src="js/auth.js"></script>
+
 <script src="js/storage.js"></script>
+
 <script src="js/theme.js"></script>
+
 <script src="js/toast.js"></script>
+
 <script src="js/notifications.js"></script>
+
 <script src="js/airtime.js"></script>
 
+
 <script>
+
     requireLogin();
+
 </script>
 
 </body>

@@ -2,31 +2,72 @@
 // POCKETPAY - ADD MONEY
 // =====================================
 
-const form = document.getElementById("addMoneyForm");
 
-const amountInput = document.getElementById("amount");
-const paymentMethod = document.getElementById("paymentMethod");
+// =====================================
+// FORM ELEMENTS
+// =====================================
 
-// Summary
-const summaryAmount = document.getElementById("summaryAmount");
-const summaryMethod = document.getElementById("summaryMethod");
-const summaryTotal = document.getElementById("summaryTotal");
+const form =
+    document.getElementById("addMoneyForm");
 
-// Confirmation Modal
-const confirmModal = document.getElementById("confirmModal");
+const amountInput =
+    document.getElementById("amount");
 
-const modalAmount = document.getElementById("modalAmount");
-const modalMethod = document.getElementById("modalMethod");
-const modalTotal = document.getElementById("modalTotal");
+const paymentMethod =
+    document.getElementById("paymentMethod");
 
-const cancelBtn = document.getElementById("cancelBtn");
-const confirmBtn = document.getElementById("confirmBtn");
 
-// Loading Modal
-const loadingModal = document.getElementById("loadingModal");
+// =====================================
+// SUMMARY
+// =====================================
 
-// Success Modal
-const successModal = document.getElementById("successModal");
+const summaryAmount =
+    document.getElementById("summaryAmount");
+
+const summaryMethod =
+    document.getElementById("summaryMethod");
+
+const summaryTotal =
+    document.getElementById("summaryTotal");
+
+
+// =====================================
+// CONFIRMATION MODAL
+// =====================================
+
+const confirmModal =
+    document.getElementById("confirmModal");
+
+const modalAmount =
+    document.getElementById("modalAmount");
+
+const modalMethod =
+    document.getElementById("modalMethod");
+
+const modalTotal =
+    document.getElementById("modalTotal");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
+
+const confirmBtn =
+    document.getElementById("confirmBtn");
+
+
+// =====================================
+// LOADING MODAL
+// =====================================
+
+const loadingModal =
+    document.getElementById("loadingModal");
+
+
+// =====================================
+// SUCCESS / RECEIPT
+// =====================================
+
+const successModal =
+    document.getElementById("successModal");
 
 const receiptReference =
     document.getElementById("receiptReference");
@@ -40,8 +81,24 @@ const receiptMethod =
 const receiptTotal =
     document.getElementById("receiptTotal");
 
+const receiptDate =
+    document.getElementById("receiptDate");
+
+const downloadReceiptBtn =
+    document.getElementById("downloadReceiptBtn");
+
+const shareReceiptBtn =
+    document.getElementById("shareReceiptBtn");
+
 const backDashboardBtn =
     document.getElementById("backDashboardBtn");
+
+
+// =====================================
+// CURRENT RECEIPT
+// =====================================
+
+let currentReceipt = null;
 
 
 // =====================================
@@ -49,10 +106,15 @@ const backDashboardBtn =
 // =====================================
 
 function formatMoney(amount) {
-    return "₦" + Number(amount).toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
+
+    return "₦" +
+        Number(amount).toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
 }
 
 
@@ -62,7 +124,9 @@ function formatMoney(amount) {
 
 function updateSummary() {
 
-    const amount = Number(amountInput.value);
+    const amount =
+        Number(amountInput.value);
+
 
     if (amount > 0) {
 
@@ -81,14 +145,11 @@ function updateSummary() {
             "₦0.00";
     }
 
+
     summaryMethod.textContent =
         paymentMethod.value || "-";
 }
 
-
-// =====================================
-// LIVE SUMMARY
-// =====================================
 
 amountInput.addEventListener(
     "input",
@@ -111,14 +172,18 @@ form.addEventListener(
 
         event.preventDefault();
 
-        // Clear previous errors
+
         document
             .querySelectorAll(".error")
             .forEach(function (error) {
+
                 error.textContent = "";
+
             });
 
+
         let isValid = true;
+
 
         const amount =
             Number(amountInput.value);
@@ -127,7 +192,8 @@ form.addEventListener(
             paymentMethod.value;
 
 
-        // Validate amount
+        // Amount validation
+
         if (
             amountInput.value.trim() === "" ||
             amount <= 0
@@ -142,7 +208,8 @@ form.addEventListener(
         }
 
 
-        // Validate payment method
+        // Payment method validation
+
         if (method === "") {
 
             document.getElementById(
@@ -179,7 +246,7 @@ form.addEventListener(
 
 
 // =====================================
-// CANCEL CONFIRMATION
+// CANCEL
 // =====================================
 
 cancelBtn.addEventListener(
@@ -188,6 +255,7 @@ cancelBtn.addEventListener(
 
         confirmModal.style.display =
             "none";
+
     }
 );
 
@@ -200,17 +268,16 @@ confirmBtn.addEventListener(
     "click",
     function () {
 
-        // Close confirmation
         confirmModal.style.display =
             "none";
 
-        // Show processing
+
         loadingModal.style.display =
             "flex";
 
 
-        // Prevent double clicks
-        confirmBtn.disabled = true;
+        confirmBtn.disabled =
+            true;
 
 
         setTimeout(
@@ -226,33 +293,62 @@ confirmBtn.addEventListener(
 
 
                     // =================================
-                    // 1. UPDATE WALLET BALANCE
+                    // UPDATE WALLET
                     // =================================
 
                     addMoney(amount);
 
 
                     // =================================
-                    // 2. SAVE TRANSACTION
+                    // GENERATE REFERENCE
+                    // =================================
+
+                    const reference =
+                        "PP" + Date.now();
+
+
+                    const transactionDate =
+                        new Date();
+
+
+                    const formattedDate =
+                        transactionDate.toLocaleString();
+
+
+                    // =================================
+                    // SAVE TRANSACTION
                     // =================================
 
                     saveTransaction({
 
                         type: "deposit",
 
-                        title: "Wallet Funding",
+                        title:
+                            "Wallet Funding",
 
-                        amount: amount,
+                        amount:
+                            amount,
 
-                        method: method,
+                        fee:
+                            0,
+
+                        total:
+                            amount,
+
+                        method:
+                            method,
+
+                        reference:
+                            reference,
 
                         date:
-                            new Date().toLocaleString()
+                            formattedDate
+
                     });
 
 
                     // =================================
-                    // 3. CREATE NOTIFICATION
+                    // NOTIFICATION
                     // =================================
 
                     if (
@@ -261,23 +357,49 @@ confirmBtn.addEventListener(
                     ) {
 
                         addNotification(
+
                             "Deposit Successful",
 
                             formatMoney(amount) +
                             " has been added to your PocketPay wallet.",
 
                             "success"
+
                         );
+
                     }
 
 
                     // =================================
-                    // 4. GENERATE REFERENCE
+                    // RECEIPT DATA
                     // =================================
 
-                    const reference =
-                        "PP" + Date.now();
+                    currentReceipt = {
 
+                        reference:
+                            reference,
+
+                        amount:
+                            amount,
+
+                        method:
+                            method,
+
+                        fee:
+                            0,
+
+                        total:
+                            amount,
+
+                        date:
+                            formattedDate
+
+                    };
+
+
+                    // =================================
+                    // FILL RECEIPT
+                    // =================================
 
                     receiptReference.textContent =
                         reference;
@@ -291,9 +413,12 @@ confirmBtn.addEventListener(
                     receiptTotal.textContent =
                         formatMoney(amount);
 
+                    receiptDate.textContent =
+                        formattedDate;
+
 
                     // =================================
-                    // 5. HIDE PROCESSING
+                    // HIDE LOADING
                     // =================================
 
                     loadingModal.style.display =
@@ -301,7 +426,7 @@ confirmBtn.addEventListener(
 
 
                     // =================================
-                    // 6. SHOW SUCCESS
+                    // SHOW RECEIPT
                     // =================================
 
                     successModal.style.display =
@@ -309,7 +434,7 @@ confirmBtn.addEventListener(
 
 
                     // =================================
-                    // 7. TOAST
+                    // TOAST
                     // =================================
 
                     if (
@@ -321,11 +446,12 @@ confirmBtn.addEventListener(
                             "Money added successfully!",
                             "success"
                         );
+
                     }
 
 
                     // =================================
-                    // 8. RESET FORM
+                    // RESET FORM
                     // =================================
 
                     form.reset();
@@ -342,33 +468,369 @@ confirmBtn.addEventListener(
 
                 } catch (error) {
 
-                    // =================================
-                    // IF ANYTHING GOES WRONG
-                    // =================================
-
                     console.error(
                         "Deposit Error:",
                         error
                     );
 
+
                     loadingModal.style.display =
                         "none";
+
 
                     showToast(
                         "Something went wrong while processing the deposit.",
                         "error"
                     );
 
+
                 } finally {
 
                     confirmBtn.disabled =
                         false;
+
                 }
 
             },
 
             2000
         );
+
+    }
+);
+
+
+// =====================================
+// SAVE / PRINT RECEIPT
+// =====================================
+
+downloadReceiptBtn.addEventListener(
+    "click",
+    function () {
+
+        if (!currentReceipt) {
+            return;
+        }
+
+
+        const receiptWindow =
+            window.open(
+                "",
+                "_blank"
+            );
+
+
+        receiptWindow.document.write(`
+
+            <!DOCTYPE html>
+
+            <html>
+
+            <head>
+
+                <title>
+                    PocketPay Deposit Receipt
+                </title>
+
+                <style>
+
+                    body {
+                        font-family: Arial, sans-serif;
+                        padding: 30px;
+                        max-width: 500px;
+                        margin: auto;
+                    }
+
+                    .receipt {
+                        border: 1px solid #ddd;
+                        padding: 25px;
+                        border-radius: 15px;
+                    }
+
+                    h1 {
+                        text-align: center;
+                        margin-bottom: 5px;
+                    }
+
+                    .subtitle {
+                        text-align: center;
+                        color: #666;
+                        margin-bottom: 25px;
+                    }
+
+                    .success {
+                        text-align: center;
+                        color: #16a34a;
+                        font-weight: bold;
+                        margin-bottom: 25px;
+                    }
+
+                    .row {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 20px;
+                        padding: 10px 0;
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .total {
+                        font-size: 20px;
+                        font-weight: bold;
+                        border-bottom: none;
+                        padding-top: 18px;
+                    }
+
+                    .footer {
+                        text-align: center;
+                        margin-top: 30px;
+                        color: #777;
+                        font-size: 13px;
+                    }
+
+                    @media print {
+
+                        body {
+                            padding: 0;
+                        }
+
+                        .receipt {
+                            border: none;
+                        }
+
+                    }
+
+                </style>
+
+            </head>
+
+
+            <body>
+
+                <div class="receipt">
+
+                    <h1>
+                        PocketPay
+                    </h1>
+
+                    <div class="subtitle">
+                        Deposit Receipt
+                    </div>
+
+                    <div class="success">
+                        ✓ Deposit Successful
+                    </div>
+
+
+                    <div class="row">
+
+                        <span>
+                            Reference
+                        </span>
+
+                        <strong>
+                            ${currentReceipt.reference}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span>
+                            Amount
+                        </span>
+
+                        <strong>
+                            ${formatMoney(
+                                currentReceipt.amount
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span>
+                            Payment Method
+                        </span>
+
+                        <strong>
+                            ${currentReceipt.method}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span>
+                            Processing Fee
+                        </span>
+
+                        <strong>
+                            ${formatMoney(
+                                currentReceipt.fee
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row total">
+
+                        <span>
+                            Total Credited
+                        </span>
+
+                        <strong>
+                            ${formatMoney(
+                                currentReceipt.total
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <span>
+                            Date
+                        </span>
+
+                        <strong>
+                            ${currentReceipt.date}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="footer">
+
+                        Thank you for using PocketPay.
+
+                    </div>
+
+                </div>
+
+
+                <script>
+
+                    window.onload = function () {
+
+                        window.print();
+
+                    };
+
+                <\/script>
+
+            </body>
+
+            </html>
+
+        `);
+
+
+        receiptWindow.document.close();
+
+    }
+);
+
+
+// =====================================
+// SHARE RECEIPT
+// =====================================
+
+shareReceiptBtn.addEventListener(
+    "click",
+    async function () {
+
+        if (!currentReceipt) {
+            return;
+        }
+
+
+        const shareText =
+
+            "PocketPay Deposit Receipt\\n\\n" +
+
+            "Status: Successful\\n" +
+
+            "Reference: " +
+            currentReceipt.reference +
+            "\\n" +
+
+            "Amount: " +
+            formatMoney(
+                currentReceipt.amount
+            ) +
+            "\\n" +
+
+            "Payment Method: " +
+            currentReceipt.method +
+            "\\n" +
+
+            "Processing Fee: " +
+            formatMoney(
+                currentReceipt.fee
+            ) +
+            "\\n" +
+
+            "Total Credited: " +
+            formatMoney(
+                currentReceipt.total
+            ) +
+            "\\n\\n" +
+
+            "PocketPay";
+
+
+        if (
+            navigator.share
+        ) {
+
+            try {
+
+                await navigator.share({
+
+                    title:
+                        "PocketPay Deposit Receipt",
+
+                    text:
+                        shareText
+
+                });
+
+            } catch (error) {
+
+                return;
+
+            }
+
+        } else {
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    shareText
+                );
+
+                showToast(
+                    "Receipt copied to clipboard.",
+                    "success"
+                );
+
+            } catch (error) {
+
+                showToast(
+                    "Unable to share receipt.",
+                    "error"
+                );
+
+            }
+
+        }
+
     }
 );
 
@@ -383,5 +845,6 @@ backDashboardBtn.addEventListener(
 
         window.location.href =
             "dashboard.html";
+
     }
 );
