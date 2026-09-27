@@ -376,3 +376,51 @@ body.dark-mode .notification-item.unread {
         font-size: 16px;
     }
 }
+
+/* =================================
+   NOTIFICATION BACKDROP
+================================= */
+
+.notification-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease,
+                visibility 0.3s ease;
+}
+
+.notification-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =================================
+   PANEL POLISH
+================================= */
+
+.notification-panel {
+    z-index: 9999;
+}
+
+
+/* =================================
+   MOBILE POLISH
+================================= */
+
+@media (max-width: 480px) {
+
+    .notification-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .notification-backdrop {
+        backdrop-filter: none;
+    }
+
+}

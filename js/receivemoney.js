@@ -1,41 +1,67 @@
+// ================================
+// POCKETPAY RECEIVE MONEY
+// ================================
+
 // Get Elements
 const copyBtn = document.getElementById("copyBtn");
 const accountNumber = document.getElementById("accountNumber");
+const downloadQRBtn = document.getElementById("downloadQRBtn");
 
-// Copy Account Number
+// ================================
+// COPY ACCOUNT NUMBER
+// ================================
+
 copyBtn.addEventListener("click", function () {
 
-    navigator.clipboard.writeText(accountNumber.textContent);
+    const number = accountNumber.textContent.trim();
 
-    // Change button text
-    copyBtn.innerHTML = `
-        <i class="fa-solid fa-check"></i>
-        Copied!
-    `;
+    navigator.clipboard.writeText(number)
+        .then(function () {
 
-    // Change button color
-    copyBtn.style.background = "#16a34a";
+            copyBtn.innerHTML = `
+                <i class="fa-solid fa-check"></i>
+                Copied!
+            `;
 
-    // Restore after 2 seconds
-    setTimeout(function () {
+            copyBtn.style.background = "#16a34a";
 
-        copyBtn.innerHTML = `
-            <i class="fa-regular fa-copy"></i>
-            Copy Number
-        `;
+            setTimeout(function () {
 
-        copyBtn.style.background = "#2563eb";
+                copyBtn.innerHTML = `
+                    <i class="fa-regular fa-copy"></i>
+                    Copy Number
+                `;
 
-    }, 2000);
+                copyBtn.style.background = "#2563eb";
+
+            }, 2000);
+
+        })
+        .catch(function () {
+
+            alert("Unable to copy account number.");
+
+        });
 
 });
 
+
+// ================================
+// GENERATE QR CODE
+// ================================
+
+const accountText = accountNumber.textContent.trim();
+
 new QRCode(document.getElementById("qrcode"), {
-    text: "PocketPay|Shoyemi Ahmed|9023456789",
+    text: `PocketPay|Shoyemi Olanrewaju Ahmed|${accountText}`,
     width: 180,
     height: 180
 });
-const downloadQRBtn = document.getElementById("downloadQRBtn");
+
+
+// ================================
+// DOWNLOAD QR CODE
+// ================================
 
 downloadQRBtn.addEventListener("click", function () {
 
