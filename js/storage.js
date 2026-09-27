@@ -27,8 +27,6 @@ if (localStorage.getItem("transactions") === null) {
 
 }
 
-
-
 // ===================================
 // Wallet Balance
 // ===================================
@@ -43,8 +41,6 @@ function getBalance() {
 
 }
 
-
-
 function setBalance(balance) {
 
     localStorage.setItem(
@@ -56,8 +52,6 @@ function setBalance(balance) {
     );
 
 }
-
-
 
 // ===================================
 // Transactions
@@ -72,8 +66,6 @@ function getTransactions() {
     );
 
 }
-
-
 
 function saveTransaction(transaction) {
 
@@ -103,8 +95,6 @@ function addMoney(amount) {
     setBalance(newBalance);
 
 }
-
-
 
 // ===================================
 // Deduct Money
